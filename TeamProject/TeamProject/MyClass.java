@@ -1,4 +1,4 @@
-package client;
+package TeamProject;
 
 public class MyClass
 {

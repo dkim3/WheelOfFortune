@@ -12,3 +12,14 @@
 /LoginControl.class
 /LoginData.class
 /LoginPanel.class
+/CategoryData.class
+/GameServer.class
+/GuessLetterData.class
+/PlayerClient.class
+/SwitchPlayer.class
+/GuessLetterControl.class
+/GuessLetterPanel.class
+/PlayerGUI.class
+/ResultControlPanel.class
+/ResultPanel.class
+/SpinWheelPanel.class
