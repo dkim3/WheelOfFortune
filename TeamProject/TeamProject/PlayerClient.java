@@ -36,7 +36,7 @@ public class PlayerClient extends AbstractClient
 		//LOGIN
 		if (((String) arg0).equals("Account Created")) 
 		{
-			CreateAccountControl.createAccountSuccess();
+			createAccountControl.addSuccess();
 			loginControl.displayError("Account Successfully Created. Please Login.");
 		}
 		else if (((String) arg0).equals("Same Username")) 

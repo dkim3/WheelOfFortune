@@ -38,8 +38,8 @@ public class PlayerGUI extends JFrame
     InitialControl ic = new InitialControl(container); 
     LoginControl lc = new LoginControl(container, clients); //Probably will want to pass in ChatClient here
     CreateAccountControl cac = new CreateAccountControl(container, clients);
-    ContactControl cc = new ContactControl(container);
-    GuessLetterControl cc = new GuessLetterControl(container);
+
+    GuessLetterControl glc = new GuessLetterControl(container);
     
     
     
@@ -47,7 +47,7 @@ public class PlayerGUI extends JFrame
     JPanel view1 = new InitialPanel(ic);
     JPanel view2 = new LoginPanel(lc);
     JPanel view3 = new CreateAccountPanel(cac);
-    JPanel view4 = new ContactPanel(cc);
+    JPanel view4 = new GuessLetterPanel(glc);
 //    JPanel view4 = new ContactPanel();
 
 

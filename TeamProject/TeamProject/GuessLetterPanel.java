@@ -9,7 +9,7 @@ import java.awt.Font;
 public class GuessLetterPanel extends JPanel
 {
 	
-	public GuessLetterPanel(CardLayout cl, JPanel container) {
+	public GuessLetterPanel(GuessLetterControl glc) {
 		setLayout(null);
 		
 		JLabel label = new JLabel("");
@@ -40,9 +40,8 @@ public class GuessLetterPanel extends JPanel
 		btnCountries.setFont(new Font("Berlin Sans FB", Font.PLAIN, 11));
 		btnCountries.setBounds(164, 224, 89, 23);
 		add(btnCountries);
+	}
 		
-	
-  
-}
+
 }
 
