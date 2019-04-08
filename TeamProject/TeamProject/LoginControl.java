@@ -1,4 +1,4 @@
-package lab7out;
+package TeamProject;
 
 import java.awt.*;
 import javax.swing.*;
