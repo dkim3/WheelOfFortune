@@ -1,9 +1,7 @@
 package TeamProject;
 import java.net.Socket;
 
-import lab7out.CreateAccountControl;
-import lab7out.LoginControl;
-import lab7out.LoginData;
+
 import ocsf.client.AbstractClient;
 
 public class PlayerClient extends AbstractClient
