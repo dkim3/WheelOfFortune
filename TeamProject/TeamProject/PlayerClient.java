@@ -53,7 +53,7 @@ public class PlayerClient extends AbstractClient
 		else if (arg0 instanceof GuessLetterData)
 		{
 			GuessLetterData tempGess = (GuessLetterData) arg0;
-
+ 
 			guessLetterControl.setGuessLetterData(tempGess); 
 
 		}
