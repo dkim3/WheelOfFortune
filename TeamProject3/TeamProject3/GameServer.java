@@ -16,7 +16,7 @@ public class GameServer extends AbstractServer
   private SwitchPlayer SwitchPlayer;
 
 
-  //Constructor...
+  //Constructor..
   public GameServer(int port) {super(port);}
 
   protected void handleMessageFromClient(Object arg0, ConnectionToClient arg1)
