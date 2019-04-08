@@ -16,7 +16,8 @@ public class PlayerClient extends AbstractClient
 	//Constructor
 	public PlayerClient() {super("localhost",8300);}
 	public PlayerClient(String host, int port) {super(host,port);}
-
+	
+	
 	public void setguessLetterControl(SwitchPlayer SwitchPlayer) {this.guessLetterControl = guessLetterControl;}
 	public void setSwitchPlayer(SwitchPlayer SwitchPlayer) {this.SwitchPlayer = SwitchPlayer;}
 
