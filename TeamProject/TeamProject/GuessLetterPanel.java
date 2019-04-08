@@ -34,7 +34,7 @@ public class GuessLetterPanel extends JPanel
 		JButton btnBrand = new JButton("Brand");
 		btnBrand.setFont(new Font("Berlin Sans FB", Font.PLAIN, 11));
 		btnBrand.setBounds(164, 173, 89, 23);
-		add(btnBrand); 
+		add(btnBrand); a
 		
 		JButton btnCountries = new JButton("Countries");
 		btnCountries.setFont(new Font("Berlin Sans FB", Font.PLAIN, 11));
