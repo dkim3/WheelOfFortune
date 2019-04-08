@@ -26,7 +26,7 @@ public class GuessLetterPanel extends JPanel
 		btnAnimals.setBounds(164, 75, 89, 23);
 		add(btnAnimals);
 		
-		JButton btnMovies = new JButton("Movies"); 
+		JButton btnMovies = new  JButton("Movies"); 
 		btnMovies.setFont(new Font("Berlin Sans FB", Font.PLAIN, 11));
 		btnMovies.setBounds(164, 123, 89, 23);
 		add(btnMovies);
