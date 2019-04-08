@@ -52,9 +52,10 @@ public class PlayerClient extends AbstractClient
 		//"WORD DATA" FROM SERVER
 		else if (arg0 instanceof GuessLetterData)
 		{
+			
 			GuessLetterData tempGess = (GuessLetterData) arg0;
  
-			guessLetterControl.setGuessLetterData(tempGess); 
+			guessLetterControl.  (tempGess); 
 
 		}
 
