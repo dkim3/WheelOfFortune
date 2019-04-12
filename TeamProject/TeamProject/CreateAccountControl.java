@@ -80,7 +80,7 @@ public class CreateAccountControl implements ActionListener
 				{
 					displayError("Sent user/pass to server.");
 					
-					client.setAccount(this);
+					client.setCreateAccountControl(this);
 					client.sendToServer(data);
 					
 				} catch (IOException e)
