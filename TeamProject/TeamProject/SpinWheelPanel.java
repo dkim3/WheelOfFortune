@@ -13,27 +13,36 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import java.awt.Font;
+  
+
+
 
 public class SpinWheelPanel extends JPanel {
 	private JTextField txtScoreToBe;
-	public SpinWheelPanel(CardLayout cl, JPanel container){
+	private JLabel lblWheelOfFortune;
+	private JLabel lblNewLabel;
+	private JButton btnSpinTheWheel;
+	private JButton btnGuessLetter;
+	
+	
+	public SpinWheelPanel(SpinWheelControl swc){
 		setLayout(null);
 		
-		JLabel lblWheelOfFortune = new JLabel("Wheel OF Fortune");
+		lblWheelOfFortune = new JLabel("Wheel OF Fortune");
 		lblWheelOfFortune.setFont(new Font("Berlin Sans FB", Font.PLAIN, 20));
 		lblWheelOfFortune.setBounds(114, 17, 173, 23);
 		add(lblWheelOfFortune);
 		
-		JLabel lblNewLabel = new JLabel("");
+		lblNewLabel = new JLabel("");
 		lblNewLabel.setIcon(new ImageIcon(SpinWheelPanel.class.getResource("/TeamProject/WheelOfFortune.png")));
 		lblNewLabel.setBounds(67, 51, 238, 223);
 		add(lblNewLabel);
 		
-		JButton btnSpinTheWheel = new JButton("Spin The Wheel");
+		btnSpinTheWheel = new JButton("Spin The Wheel");
 		btnSpinTheWheel.setBounds(20, 343, 130, 23);
 		add(btnSpinTheWheel);
 		
-		JButton btnGuessLetter = new JButton("Guess Letter");
+		btnGuessLetter = new JButton("Guess Letter");
 		btnGuessLetter.setBounds(237, 343, 122, 23);
 		add(btnGuessLetter);
 		
