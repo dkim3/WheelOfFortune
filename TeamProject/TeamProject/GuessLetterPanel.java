@@ -17,6 +17,7 @@ public class GuessLetterPanel extends JPanel {
 	private String lbl;
 	private JTextField textFieldOponent;
 	private String errmsg;
+	private JLabel turnLabel;
 
 	public String getLetter() {
 		return GuessTxtField.getText();
@@ -76,14 +77,14 @@ public class GuessLetterPanel extends JPanel {
 		add(lblGuessALetter);
 
 		GuessTxtField = new JTextField();
-		GuessTxtField.setBounds(106, 89, 71, 64);
+		GuessTxtField.setBounds(104, 125, 71, 64);
 		add(GuessTxtField);
 		GuessTxtField.setColumns(10);
 		cc.setJTextField(GuessTxtField);
 
 		JButton btnGuess = new JButton("Guess");
 		btnGuess.setFont(new Font("Sylfaen", Font.PLAIN, 16));
-		btnGuess.setBounds(207, 89, 85, 64);
+		btnGuess.setBounds(207, 125, 85, 64);
 		add(btnGuess);
 		btnGuess.addActionListener(cc);
 
@@ -112,7 +113,7 @@ public class GuessLetterPanel extends JPanel {
 
 		JPanel Word_Panel = new JPanel();
 		Word_Panel.setBackground(Color.GRAY);
-		Word_Panel.setBounds(21, 175, 353, 54);
+		Word_Panel.setBounds(27, 208, 353, 54);
 		add(Word_Panel);
 		Word_Panel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		cc.setDisplayPanel(Word_Panel);
@@ -157,6 +158,13 @@ public class GuessLetterPanel extends JPanel {
 		textFieldOponent.setColumns(10);
 		textFieldOponent.setBounds(137, 305, 96, 64);
 		add(textFieldOponent);
-	}
 
+		turnLabel = new JLabel("Who's turn?\r\n");
+		turnLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		turnLabel.setForeground(Color.RED);
+		turnLabel.setHorizontalAlignment(SwingConstants.CENTER);
+		turnLabel.setBounds(56, 80, 296, 35);
+		turnLabel.setVisible(false);
+		add(turnLabel);
+	}
 }
