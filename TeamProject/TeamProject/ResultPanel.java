@@ -48,7 +48,7 @@ public class ResultPanel extends JPanel
   }
 
   
-	public ResultPanel(CardLayout cl, JPanel container) {
+	public ResultPanel(ResultControl rc) {
 		setLayout(null);
 		
 		TopLable = new JLabel("Winner is :");
