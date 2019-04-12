@@ -13,6 +13,10 @@ public class GuessLetterControl implements ActionListener {
 	// private CardLayout cl;
 	private JPanel container;
 	private PlayerClient client;
+	
+	private JTextField textField_Score;
+	private JTextField textField_Price;
+	private JTextField textFieldOponent;
 
 	private GuessLetterData data;
 	private JLabel lblWrong;
@@ -123,10 +127,21 @@ public class GuessLetterControl implements ActionListener {
 		}
 	}
 
-	public void display(GuessLetterData Data) {
+	public void updateDisplay(GuessLetterData Data) {
+		
+		setWord(data);
+
+		textField_Score.setText(Data.get);
+		textField_Price.setText(Data.getPrizeMoney().toString());
+		textFieldOponent.setText(Data.get);
+
+		
+		guessinglbl.setText(Data.getwordToGuess().toString());
+
 		GuessLetterPanel guessLetterPannel = (GuessLetterPanel) container.getComponent(2);
 
 		guessLetterPannel.setTextField_Price(data.getPrizeMoney());
+		
 	}
 
 }
