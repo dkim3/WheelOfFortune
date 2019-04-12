@@ -17,8 +17,14 @@ public class SwitchPlayer
 	public PlayerClient getNextPlayer () {
 		return nextPlayer;
 	}
-	public void setCurrentPlayer (this.CurrentPlayer = CurrentPlayer;)
-	public void setNextPlayer (this.NextPlayer = NextPlayer;)
+	public void setCurrentPlayer (PlayerClient CurrentPlayer)
+	{
+		this.currentPlayer= CurrentPlayer;
+	}
+	public void setNextPlayer (PlayerClient nextPlayer)
+	{
+		this.nextPlayer= nextPlayer;
+	}
 
 
 }
