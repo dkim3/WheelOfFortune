@@ -6,6 +6,11 @@ public class GuessLetterData {
 	private Integer prizeMoney;
 	private String wordToGuess;
 	private ArrayList<Character> chosenLetter;
+	private Integer score;
+
+	public void setScore(Integer score) {
+		this.score = score;
+	}
 
 	public GuessLetterData(char charAt, Integer price) {
 		chosenLetter = new ArrayList<Character>();
@@ -28,6 +33,10 @@ public class GuessLetterData {
 
 	public Integer getPrizeMoney() {
 		return prizeMoney;
+	}
+
+	public Integer getScore() {
+		return score;
 	}
 
 	public String getwordToGuess() {
