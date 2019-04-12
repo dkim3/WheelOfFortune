@@ -72,25 +72,24 @@ public class PlayerClient extends AbstractClient
 		else if(arg0 instanceof CategoryData) {
 			CategoryData tempcategory = (CategoryData) arg0;
 			
-			
-			
-			chooseCategoryControl.
 
 		}
 		//"WORD DATA" FROM SERVER
 		else if (arg0 instanceof GuessLetterData)
-		{
-			
-			GuessLetterData tempGess = (GuessLetterData) arg0;
-
-			guessLetterControl.updateDisplay(tempGess); 
-
+		{	
+			GuessLetterData tempGuessData = (GuessLetterData) arg0;
+			if (tempGuessData.getLetterLeft() == 0)
+			{
+			  ResultControl.display(tempGuessData);
+			}
+			  //when player receive GuessLetterData which mean he get it wrong
+			guessLetterControl.waitScreen(tempGuessData);
+			guessLetterControl.updateDisplay(tempGuessData); 
 		}
 		//HANDLE SWITCH PLAYER REQUEST FROM SERVER
 		else if (arg0 instanceof SwitchPlayer)
 		{
 			SwitchPlayer tempSwitch = (SwitchPlayer) arg0;
-			
 			spinWheelControl.switchPlayer(tempSwitch);
 		}
 
