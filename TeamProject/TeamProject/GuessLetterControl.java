@@ -21,6 +21,7 @@ public class GuessLetterControl implements ActionListener {
 	private ArrayList<Character> wordToDisplay;
 	private String lbl;
 	private String errMsg;
+	private JLabel turnLabel;
 
 	public JLabel getErrlbl() {
 		return lblWrong;
@@ -112,10 +113,12 @@ public class GuessLetterControl implements ActionListener {
 			} else if (guessLetterPanel.getLetter() == "") {
 				lblWrong.setText("Please enter a letter");
 				lblWrong.setVisible(true);
+				GuessedLetter.setText("");
 
 			} else if (guessLetterPanel.getLetter().length() > 1) {
 				lblWrong.setText("Please enter only one letter");
 				lblWrong.setVisible(true);
+				GuessedLetter.setText("");
 			}
 		}
 	}
