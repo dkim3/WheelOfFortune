@@ -10,7 +10,6 @@ import java.awt.FlowLayout;
 import javax.swing.SwingConstants;
 
 public class GuessLetterPanel extends JPanel {
-	
 	private JTextField GuessTxtField;
 	private JTextField textField_Score;
 	private JTextField textField_Price;
@@ -18,11 +17,6 @@ public class GuessLetterPanel extends JPanel {
 	private String lbl;
 	private JTextField textFieldOponent;
 	private String errmsg;
-	private JLabel label;
-
-	public void setWordPanel(GuessLetterControl display) {
-
-	}
 
 	public String getLetter() {
 		return GuessTxtField.getText();
@@ -119,8 +113,9 @@ public class GuessLetterPanel extends JPanel {
 		JPanel Word_Panel = new JPanel();
 		Word_Panel.setBackground(Color.GRAY);
 		Word_Panel.setBounds(21, 175, 353, 54);
-		Word_Panel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		add(Word_Panel);
+		Word_Panel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+		cc.setDisplayPanel(Word_Panel);
 
 		JLabel lblChoosenLettes = new JLabel("Choosen Lettes:-");
 		lblChoosenLettes.setFont(new Font("Tarzan", Font.PLAIN, 13));
@@ -133,14 +128,11 @@ public class GuessLetterPanel extends JPanel {
 		lblWrongLetters.setFont(new Font("Roland", Font.PLAIN, 18));
 		lblWrongLetters.setBounds(31, 407, 244, 33);
 		add(lblWrongLetters);
-		
 		lbl = cc.getWord().toString();
-		//inside the panel to display word to guess with letter chosen so far (as string)
 		JLabel label = new JLabel(lbl);
 		label.setForeground(Color.WHITE);
 		label.setFont(new Font("Tahoma", Font.BOLD, 36));
-		Word_Panel.add(label);
-		cc.setguessinglbl(label);
+		Word_Panel.add(new JLabel(lbl));
 
 		JLabel lblError = new JLabel("Error Messages");
 		lblError.setHorizontalAlignment(SwingConstants.CENTER);
@@ -148,10 +140,10 @@ public class GuessLetterPanel extends JPanel {
 		lblError.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblError.setBounds(46, 46, 328, 33);
 		lblError.setVisible(false);
-		lblError.setText(cc.getErrMsg());
-		lblError.setVisible(true);
-		
-		
+		cc.setErrlbl(lblError);
+
+		// cc.setDisplayPanel(Word_Panel);
+
 		add(lblError);
 
 		JLabel lblOponentScore = new JLabel("Oponent Score:-");
@@ -165,7 +157,6 @@ public class GuessLetterPanel extends JPanel {
 		textFieldOponent.setColumns(10);
 		textFieldOponent.setBounds(137, 305, 96, 64);
 		add(textFieldOponent);
-
 	}
 
 }
