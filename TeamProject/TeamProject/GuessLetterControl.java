@@ -17,28 +17,26 @@ public class GuessLetterControl implements ActionListener {
 	private GuessLetterData data;
 	private JLabel lblWrong;
 	private JTextField GuessedLetter;
-
+	private JPanel displayPanel;
 	private ArrayList<Character> wordToDisplay;
 	private String lbl;
 	private String errMsg;
-	private JLabel guessinglbl;
 
-	public JLabel getguessinglbl() {
-		return guessinglbl;
+	public JLabel getErrlbl() {
+		return lblWrong;
 	}
 
-	public void setguessinglbl(JLabel guessinglbl) {
-		this.guessinglbl = guessinglbl;
-	}
-	
-	public String getErrMsg() {
-		return errMsg;
+	public void setErrlbl(JLabel errLbl) {
+		this.lblWrong = errLbl;
 	}
 
-	public void setErrMsg(String errMsg) {
-		this.errMsg = errMsg;
+	public JPanel getDisplayPanel() {
+		return displayPanel;
 	}
 
+	public void setDisplayPanel(JPanel displayPanel) {
+		this.displayPanel = displayPanel;
+	}
 
 	public void setWord(GuessLetterData Data) {
 
@@ -95,27 +93,29 @@ public class GuessLetterControl implements ActionListener {
 		if (command == "Guess") {
 			if (guessLetterPanel.getLetter().length() == 1) {
 				// GuessTxtField.getT
+				lblWrong.setVisible(false);
 
 				GuessLetterData data = new GuessLetterData(GuessedLetter.getText().charAt(0),
 						guessLetterPanel.getPrice());
-				setWord(data);
-				
+
 				try {
 					client.sendToServer(data);
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
 
-				guessinglbl.setText(wordToDisplay.toString());
-
-
-
+				lbl = wordToDisplay.toString();
+				JLabel label = new JLabel(lbl);
+				label.setForeground(Color.WHITE);
+				label.setFont(new Font("Tahoma", Font.BOLD, 36));
+				displayPanel.add(new JLabel(lbl));
 			} else if (guessLetterPanel.getLetter() == "") {
-				lblWrong.setText("Please enter a letter"); 
+				lblWrong.setText("Please enter a letter");
+				lblWrong.setVisible(true);
 
 			} else if (guessLetterPanel.getLetter().length() > 1) {
-				
-				
+				lblWrong.setText("Please enter only one letter");
+				lblWrong.setVisible(true);
 			}
 		}
 	}
