@@ -224,9 +224,9 @@ public class GuessLetterControl implements ActionListener {
 		lblLettersSoFar.setText(Data.getchosenLetter().toString());
 		lblLettersSoFar.setVisible(true);
 
-		GuessLetterPanel guessLetterPannel = (GuessLetterPanel) container.getComponent(2);
-
-		guessLetterPannel.setTextField_Price(data.getPrizeMoney());
+//		GuessLetterPanel guessLetterPannel = (GuessLetterPanel) container.getComponent(2);
+//
+//		guessLetterPannel.setTextField_Price(data.getPrizeMoney());
 
 	}
 
