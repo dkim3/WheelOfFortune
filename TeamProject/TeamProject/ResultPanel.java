@@ -51,16 +51,16 @@ public class ResultPanel extends JPanel
 	public ResultPanel(ResultControl rc) {
 		setLayout(null);
 		
-		TopLable = new JLabel("Winner is :");
+		TopLable = new JLabel("TBD");
 		TopLable.setForeground(Color.RED);
 		TopLable.setFont(new Font("Berlin Sans FB", Font.PLAIN, 20));
 		TopLable.setBounds(130, 11, 90, 27);
 		add(TopLable);
 		
-		Winner = new JLabel("TBD");
-		Winner.setFont(new Font("Berlin Sans FB", Font.PLAIN, 15));
-		Winner.setBounds(230, 18, 46, 14);
-		add(Winner);
+//		Winner = new JLabel("TBD");
+//		Winner.setFont(new Font("Berlin Sans FB", Font.PLAIN, 15));
+//		Winner.setBounds(230, 18, 46, 14);
+//		add(Winner);
 		
 		Scores = new JLabel("Scores");
 		Scores.setFont(new Font("Berlin Sans FB", Font.PLAIN, 20));
