@@ -14,7 +14,8 @@ public class PlayerClient extends AbstractClient
 	private GuessLetterControl guessLetterControl;
 	private SpinWheelControl spinWheelControl;
 	private ChooseCategoryControl chooseCategoryControl;
-	
+	private ResultControl resultControl;
+
 
 
 
@@ -46,6 +47,10 @@ public class PlayerClient extends AbstractClient
 	public void setChooseCategoryControl(ChooseCategoryControl chooseCategoryControl) {
 		this.chooseCategoryControl = chooseCategoryControl;}
 	
+	public ResultControl getResultControl() {return resultControl;}
+	public void setResultControl( ResultControl resultControl ) {
+		this.resultControl = resultControl;}
+	
 	
 
 	protected void handleMessageFromServer(Object arg0)
@@ -71,8 +76,7 @@ public class PlayerClient extends AbstractClient
 		
 		else if(arg0 instanceof CategoryData) {
 			CategoryData tempcategory = (CategoryData) arg0;
-			
-
+			spinWheelControl
 		}
 		//"WORD DATA" FROM SERVER
 		else if (arg0 instanceof GuessLetterData)
@@ -80,7 +84,7 @@ public class PlayerClient extends AbstractClient
 			GuessLetterData tempGuessData = (GuessLetterData) arg0;
 			if (tempGuessData.getLetterLeft() == 0)
 			{
-			  ResultControl.display(tempGuessData);
+				resultControl.display(tempGuessData);
 			}
 			  //when player receive GuessLetterData which mean he get it wrong
 			guessLetterControl.waitScreen(tempGuessData);
@@ -92,8 +96,6 @@ public class PlayerClient extends AbstractClient
 			SwitchPlayer tempSwitch = (SwitchPlayer) arg0;
 			spinWheelControl.switchPlayer(tempSwitch);
 		}
-
-
 
 
 	}
