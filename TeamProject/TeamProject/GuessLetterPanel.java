@@ -3,6 +3,7 @@ package TeamProject;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import java.awt.Font;
+import java.awt.BorderLayout;
 import java.awt.Color;
 import javax.swing.JTextField;
 import javax.swing.JButton;
@@ -13,11 +14,14 @@ public class GuessLetterPanel extends JPanel {
 	private JTextField GuessTxtField;
 	private JTextField textField_Score;
 	private JTextField textField_Price;
-	private String word;
-	private String lbl;
 	private JTextField textFieldOponent;
-	private String errmsg;
+
 	private JLabel turnLabel;
+	private JLabel guessinglbl;
+	private JLabel lblError;
+	private JLabel lblLettersSoFar;
+
+	private JPanel Word_Panel;
 
 	public String getLetter() {
 		return GuessTxtField.getText();
@@ -49,22 +53,6 @@ public class GuessLetterPanel extends JPanel {
 
 	public void setTextField_Price(Integer textField_Price) {
 		this.textField_Price.setText(textField_Price.toString());
-	}
-
-	public String getWord() {
-		return word;
-	}
-
-	public void setWord(String word) {
-		this.word = word;
-	}
-
-	public String getLbl() {
-		return lbl;
-	}
-
-	public void setLbl(String lbl) {
-		this.lbl = lbl;
 	}
 
 	public GuessLetterPanel(GuessLetterControl cc) {
@@ -103,6 +91,8 @@ public class GuessLetterPanel extends JPanel {
 
 		textField_Score = new JTextField();
 		textField_Score.setBounds(21, 305, 96, 64);
+		textField_Score.setEditable(false);
+		cc.setTextField_Score(textField_Score);
 		add(textField_Score);
 		textField_Score.setColumns(10);
 
@@ -111,12 +101,11 @@ public class GuessLetterPanel extends JPanel {
 		textField_Price.setBounds(296, 305, 96, 64);
 		add(textField_Price);
 
-		JPanel Word_Panel = new JPanel();
+		Word_Panel = new JPanel();
 		Word_Panel.setBackground(Color.GRAY);
 		Word_Panel.setBounds(27, 208, 353, 54);
 		add(Word_Panel);
-		Word_Panel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
-		cc.setDisplayPanel(Word_Panel);
+		Word_Panel.setLayout(new BorderLayout());
 
 		JLabel lblChoosenLettes = new JLabel("Choosen Lettes:-");
 		lblChoosenLettes.setFont(new Font("Tarzan", Font.PLAIN, 13));
@@ -124,27 +113,28 @@ public class GuessLetterPanel extends JPanel {
 		lblChoosenLettes.setBounds(21, 379, 126, 26);
 		add(lblChoosenLettes);
 
-		JLabel lblWrongLetters = new JLabel("letters");
-		lblWrongLetters.setForeground(new Color(0, 0, 0));
-		lblWrongLetters.setFont(new Font("Roland", Font.PLAIN, 18));
-		lblWrongLetters.setBounds(31, 407, 244, 33);
-		add(lblWrongLetters);
-		lbl = cc.getWord().toString();
-		JLabel label = new JLabel(lbl);
-		label.setForeground(Color.WHITE);
-		label.setFont(new Font("Tahoma", Font.BOLD, 36));
-		Word_Panel.add(new JLabel(lbl));
+		lblLettersSoFar = new JLabel("letters");
+		lblLettersSoFar.setForeground(new Color(0, 0, 0));
+		lblLettersSoFar.setFont(new Font("Roland", Font.PLAIN, 18));
+		lblLettersSoFar.setBounds(31, 407, 244, 33);
+		lblError.setVisible(false);
+		cc.setlblLettersSoFar(lblLettersSoFar);
+		add(lblLettersSoFar);
 
-		JLabel lblError = new JLabel("Error Messages");
+		guessinglbl = new JLabel("Word with correct letters");
+		guessinglbl.setForeground(Color.WHITE);
+		guessinglbl.setFont(new Font("Tahoma", Font.BOLD, 36));
+		lblError.setVisible(false);
+		cc.setGuessinglbl(guessinglbl);
+		Word_Panel.add(guessinglbl, BorderLayout.CENTER);
+
+		lblError = new JLabel("Error Messages");
 		lblError.setHorizontalAlignment(SwingConstants.CENTER);
 		lblError.setForeground(Color.RED);
 		lblError.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblError.setBounds(46, 46, 328, 33);
+		lblError.setBounds(30, 47, 328, 33);
 		lblError.setVisible(false);
-		cc.setErrlbl(lblError);
-
-		// cc.setDisplayPanel(Word_Panel);
-
+		cc.setlblError(lblError);
 		add(lblError);
 
 		JLabel lblOponentScore = new JLabel("Oponent Score:-");
@@ -157,6 +147,8 @@ public class GuessLetterPanel extends JPanel {
 		textFieldOponent = new JTextField();
 		textFieldOponent.setColumns(10);
 		textFieldOponent.setBounds(137, 305, 96, 64);
+		textFieldOponent.setEditable(false);
+		cc.setOpponent_Score(textFieldOponent);
 		add(textFieldOponent);
 
 		turnLabel = new JLabel("Who's turn?\r\n");
