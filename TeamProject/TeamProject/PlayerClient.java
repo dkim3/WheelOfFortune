@@ -16,9 +16,6 @@ public class PlayerClient extends AbstractClient
 	private ChooseCategoryControl chooseCategoryControl;
 	private ResultControl resultControl;
 
-
-
-
 	//Constructor
 	public PlayerClient() {super("localhost",8300);}
 	public PlayerClient(String host, int port) {super(host,port);}
@@ -76,7 +73,7 @@ public class PlayerClient extends AbstractClient
 		
 		else if(arg0 instanceof CategoryData) {
 			CategoryData tempcategory = (CategoryData) arg0;
-			spinWheelControl
+			spinWheelControl.setCategoryData(tempcategory);
 		}
 		//"WORD DATA" FROM SERVER
 		else if (arg0 instanceof GuessLetterData)
