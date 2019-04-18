@@ -7,6 +7,24 @@ public class GuessLetterData {
 	private String wordToGuess;
 	private ArrayList<Character> chosenLetter;
 	private Integer score;
+	private Integer score_2;
+	private Integer letterLeft;
+
+	public Integer getLetterLeft() {
+		return letterLeft;
+	}
+
+	public void setLetterLeft(Integer letterLeft) {
+		this.letterLeft = letterLeft;
+	}
+
+	public Integer getScore_2() {
+		return score_2;
+	}
+
+	public void setScore_2(Integer score_2) {
+		this.score_2 = score_2;
+	}
 
 	public void setScore(Integer score) {
 		this.score = score;
@@ -25,6 +43,8 @@ public class GuessLetterData {
 
 	public void setwordToGuess(String wordToGuess) {
 		this.wordToGuess = wordToGuess;
+		this.letterLeft = wordToGuess.length();
+
 	}
 
 	public void setchosenLetter(Character chosenLetter) {
