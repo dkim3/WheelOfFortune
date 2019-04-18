@@ -65,6 +65,7 @@ public class GuessLetterData {
 
 	public ArrayList<Character> getchosenLetter() {
 		return chosenLetter;
+		
 	}
 
 }
