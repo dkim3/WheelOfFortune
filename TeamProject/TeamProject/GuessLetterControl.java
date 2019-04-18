@@ -14,13 +14,15 @@ public class GuessLetterControl implements ActionListener {
 	private JPanel container;
 	private PlayerClient client;
 	private GuessLetterData data;
+
 	private SwitchPlayer switchPlayer;
 	private ArrayList<Character> wordToDisplay;
+	private ArrayList<Character> lettersSoFar;
 
 	private JTextField textField_Score;
 	private JTextField opponent_Score;
 	private JTextField textField_Price;
-	private JTextField textFieldOponent;
+
 	private JTextField GuessedLetter;
 
 	private String lbl;
@@ -31,7 +33,41 @@ public class GuessLetterControl implements ActionListener {
 	private JLabel guessinglbl;
 	private JLabel lblError;
 
+	private JButton guessButton;
+
 	// setters and getters
+	public GuessLetterData getData() {
+		return data;
+	}
+
+	public void setData(GuessLetterData data) {
+		this.data = data;
+	}
+
+	public JTextField getTextField_Price() {
+		return textField_Price;
+	}
+
+	public void setTextField_Price(JTextField textField_Price) {
+		this.textField_Price = textField_Price;
+	}
+
+	public JLabel getTurnLabel() {
+		return turnLabel;
+	}
+
+	public void setTurnLabel(JLabel turnLabel) {
+		this.turnLabel = turnLabel;
+	}
+
+	public JButton getGuessButton() {
+		return guessButton;
+	}
+
+	public void setGuessButton(JButton guessButton) {
+		this.guessButton = guessButton;
+	}
+
 	public JTextField getTextField_Score() {
 		return textField_Score;
 	}
@@ -126,12 +162,17 @@ public class GuessLetterControl implements ActionListener {
 
 		if (command == "Guess") {
 			if (guessLetterPanel.getLetter().length() == 1) {
+
 				// GuessTxtField.getT
 				lblError.setVisible(false);
+				turnLabel.setText("Your Turn!");
+				guessButton.setVisible(true);
+				data.setchosenLetter(guessLetterPanel.getLetter().charAt(0));
 
 				if (data.getwordToGuess().contains(guessLetterPanel.getLetter())) {
 					data.setScore(data.getPrizeMoney() + data.getScore());
 					data.setLetterLeft(data.getLetterLeft() - 1);
+					updateDisplay(data);
 					try {
 						client.sendToServer(data);
 					} catch (IOException e) {
@@ -139,17 +180,12 @@ public class GuessLetterControl implements ActionListener {
 					}
 				} else
 					try {
+						switchPlayer.setLettersSoFar(data.getchosenLetter());
 						client.sendToServer(switchPlayer);
 					} catch (IOException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
-
-				lbl = wordToDisplay.toString();
-				guessinglbl.setText(lbl);
-				guessinglbl.setForeground(Color.WHITE);
-				guessinglbl.setFont(new Font("Tahoma", Font.BOLD, 36));
-				guessinglbl.setVisible(true);
 
 				// displayPanel.add(guessinglbl,BorderLayout.CENTER);
 			} else if (guessLetterPanel.getLetter() == "") {
@@ -172,8 +208,16 @@ public class GuessLetterControl implements ActionListener {
 		setWord(data);
 
 		textField_Score.setText(Data.getScore().toString());
+
 		textField_Price.setText(Data.getPrizeMoney().toString());
-		textFieldOponent.setText(Data.getScore().toString());
+
+		opponent_Score.setText(Data.getScore().toString());
+
+		lbl = wordToDisplay.toString();
+		guessinglbl.setText(lbl);
+		guessinglbl.setForeground(Color.WHITE);
+		guessinglbl.setFont(new Font("Tahoma", Font.BOLD, 36));
+		guessinglbl.setVisible(true);
 
 		// set the word with the right guessed letters so far
 		guessinglbl.setText(Data.getwordToGuess().toString());
@@ -189,7 +233,14 @@ public class GuessLetterControl implements ActionListener {
 	public void waitScreen(GuessLetterData Data) {
 		// Show the results. The winner.
 		textField_Score.setText(Data.getScore().toString());
+
 		opponent_Score.setText(Data.getScore_2().toString());
+
+		textField_Price.setText(Data.getPrizeMoney().toString());
+
+		guessButton.setVisible(false);
+		GuessedLetter.setEditable(false);
+		turnLabel.setText("Opponent Turn");
 
 	}
 
