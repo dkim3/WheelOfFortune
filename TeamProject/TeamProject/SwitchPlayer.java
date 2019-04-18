@@ -1,51 +1,39 @@
-    
+
 package TeamProject;
 
-public class SwitchPlayer
-{
-  private PlayerClient currentPlayer;
-  private PlayerClient nextPlayer;
-  private Integer score;
-  private Integer score_2;
+import java.util.ArrayList;
 
-  public Integer getScore()
-  {
-    return score;
-  }
+public class SwitchPlayer {
+	private PlayerClient currentPlayer;
+	private PlayerClient nextPlayer;
+	private ArrayList<Character> lettersSoFar;
 
-  public void setScore(Integer score)
-  {
-    this.score = score;
-  }
+	public ArrayList<Character> getLettersSoFar() {
+		return lettersSoFar;
+	}
 
-  public Integer getScore_2()
-  {
-    return score_2;
-  }
+	public void setLettersSoFar(ArrayList<Character> lettersSoFar) {
+		this.lettersSoFar = lettersSoFar;
+	}
 
-  public void setScore_2(Integer score_2)
-  {
-    this.score_2 = score_2;
-  }
+	public SwitchPlayer(PlayerClient currentPlayer, PlayerClient nextPlayer) {
+		this.currentPlayer = currentPlayer;
+		this.nextPlayer = nextPlayer;
+	}
 
-  public SwitchPlayer (PlayerClient currentPlayer, PlayerClient nextPlayer)
-  {
-    this.currentPlayer = currentPlayer;
-    this.nextPlayer = nextPlayer;
-  }
+	public PlayerClient getCurrentPlayer() {
+		return currentPlayer;
+	}
 
-  public PlayerClient getCurrentPlayer () {
-    return currentPlayer;
-  }
-  public PlayerClient getNextPlayer () {
-    return nextPlayer;
-  }
-  public void setCurrentPlayer (PlayerClient CurrentPlayer)
-  {
-    this.currentPlayer= CurrentPlayer;
-  }
-  public void setNextPlayer (PlayerClient nextPlayer)
-  {
-    this.nextPlayer= nextPlayer;
-  }
+	public PlayerClient getNextPlayer() {
+		return nextPlayer;
+	}
+
+	public void setCurrentPlayer(PlayerClient CurrentPlayer) {
+		this.currentPlayer = CurrentPlayer;
+	}
+
+	public void setNextPlayer(PlayerClient nextPlayer) {
+		this.nextPlayer = nextPlayer;
+	}
 }
