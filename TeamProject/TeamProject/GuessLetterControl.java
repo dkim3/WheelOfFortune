@@ -10,37 +10,66 @@ import javax.swing.*;
 
 public class GuessLetterControl implements ActionListener {
 
-	// private CardLayout cl;
+	// Private Data Fields
 	private JPanel container;
 	private PlayerClient client;
-	
+	private GuessLetterData data;
+	private SwitchPlayer switchPlayer;
+	private ArrayList<Character> wordToDisplay;
+
 	private JTextField textField_Score;
+	private JTextField opponent_Score;
 	private JTextField textField_Price;
 	private JTextField textFieldOponent;
-
-	private GuessLetterData data;
-	private JLabel lblWrong;
 	private JTextField GuessedLetter;
-	private JPanel displayPanel;
-	private ArrayList<Character> wordToDisplay;
+
 	private String lbl;
 	private String errMsg;
+
 	private JLabel turnLabel;
+	private JLabel lblLettersSoFar;
+	private JLabel guessinglbl;
+	private JLabel lblError;
 
-	public JLabel getErrlbl() {
-		return lblWrong;
+	// setters and getters
+	public JTextField getTextField_Score() {
+		return textField_Score;
 	}
 
-	public void setErrlbl(JLabel errLbl) {
-		this.lblWrong = errLbl;
+	public void setTextField_Score(JTextField textField_Score) {
+		this.textField_Score = textField_Score;
 	}
 
-	public JPanel getDisplayPanel() {
-		return displayPanel;
+	public JTextField getOpponent_Score() {
+		return opponent_Score;
 	}
 
-	public void setDisplayPanel(JPanel displayPanel) {
-		this.displayPanel = displayPanel;
+	public void setOpponent_Score(JTextField opponent_Score) {
+		this.opponent_Score = opponent_Score;
+	}
+
+	public JLabel getlblLettersSoFar() {
+		return lblLettersSoFar;
+	}
+
+	public void setlblLettersSoFar(JLabel lblLettersSoFar) {
+		this.lblLettersSoFar = lblLettersSoFar;
+	}
+
+	public JLabel getGuessinglbl() {
+		return guessinglbl;
+	}
+
+	public void setGuessinglbl(JLabel guessinglbl) {
+		this.guessinglbl = guessinglbl;
+	}
+
+	public JLabel getlblError() {
+		return lblError;
+	}
+
+	public void setlblError(JLabel errLbl) {
+		this.lblError = errLbl;
 	}
 
 	public void setWord(GuessLetterData Data) {
@@ -98,50 +127,70 @@ public class GuessLetterControl implements ActionListener {
 		if (command == "Guess") {
 			if (guessLetterPanel.getLetter().length() == 1) {
 				// GuessTxtField.getT
-				lblWrong.setVisible(false);
+				lblError.setVisible(false);
 
-				GuessLetterData data = new GuessLetterData(GuessedLetter.getText().charAt(0),
-						guessLetterPanel.getPrice());
-
-				try {
-					client.sendToServer(data);
-				} catch (IOException e) {
-					e.printStackTrace();
-				}
+				if (data.getwordToGuess().contains(guessLetterPanel.getLetter())) {
+					data.setScore(data.getPrizeMoney() + data.getScore());
+					data.setLetterLeft(data.getLetterLeft() - 1);
+					try {
+						client.sendToServer(data);
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+				} else
+					try {
+						client.sendToServer(switchPlayer);
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 
 				lbl = wordToDisplay.toString();
-				JLabel label = new JLabel(lbl);
-				label.setForeground(Color.WHITE);
-				label.setFont(new Font("Tahoma", Font.BOLD, 36));
-				displayPanel.add(new JLabel(lbl));
+				guessinglbl.setText(lbl);
+				guessinglbl.setForeground(Color.WHITE);
+				guessinglbl.setFont(new Font("Tahoma", Font.BOLD, 36));
+				guessinglbl.setVisible(true);
+
+				// displayPanel.add(guessinglbl,BorderLayout.CENTER);
 			} else if (guessLetterPanel.getLetter() == "") {
-				lblWrong.setText("Please enter a letter");
-				lblWrong.setVisible(true);
+				lblError.setText("Please enter a letter");
+				lblError.setVisible(true);
 				GuessedLetter.setText("");
 
 			} else if (guessLetterPanel.getLetter().length() > 1) {
-				lblWrong.setText("Please enter only one letter");
-				lblWrong.setVisible(true);
+				lblError.setText("Please enter only one letter");
+				lblError.setVisible(true);
 				GuessedLetter.setText("");
 			}
+
 		}
 	}
 
+	//
 	public void updateDisplay(GuessLetterData Data) {
-		
+
 		setWord(data);
 
-		textField_Score.setText(Data.get);
+		textField_Score.setText(Data.getScore().toString());
 		textField_Price.setText(Data.getPrizeMoney().toString());
-		textFieldOponent.setText(Data.get);
+		textFieldOponent.setText(Data.getScore().toString());
 
-		
+		// set the word with the right guessed letters so far
 		guessinglbl.setText(Data.getwordToGuess().toString());
+		lblLettersSoFar.setText(Data.getchosenLetter().toString());
+		lblLettersSoFar.setVisible(true);
 
 		GuessLetterPanel guessLetterPannel = (GuessLetterPanel) container.getComponent(2);
 
 		guessLetterPannel.setTextField_Price(data.getPrizeMoney());
-		
+
+	}
+
+	public void waitScreen(GuessLetterData Data) {
+		// Show the results. The winner.
+		textField_Score.setText(Data.getScore().toString());
+		opponent_Score.setText(Data.getScore_2().toString());
+
 	}
 
 }
