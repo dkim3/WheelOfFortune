@@ -10,18 +10,18 @@ import ocsf.server.ConnectionToClient;
 public class GameServer extends AbstractServer
 {
 	private Database database;
-	
+
 	private CategoryData serverCategoryData;
 	private GuessLetterData guessLetterData;
 	private SwitchPlayer SwitchPlayer;	
 	private Integer numCategory =0;	
-	
-    private ArrayList<ConnectionToClient> clientList;
+
+	private ArrayList<ConnectionToClient> clientList;
 
 	//Constructor
 	public GameServer(int port) {
 		super(port);
-        clientList = new ArrayList<ConnectionToClient>();
+		clientList = new ArrayList<ConnectionToClient>();
 
 	}
 
@@ -80,9 +80,16 @@ public class GameServer extends AbstractServer
 		{
 			serverCategoryData = (CategoryData) arg0;			
 			String category = serverCategoryData.getCategory();			
-			serverCategoryData.setWord(database.chooseWord(category));			
-			numCategory++;		
-			if(numCategory ==2)
+			try {
+				serverCategoryData.setWord(database.chooseWord(category));
+			} catch (SQLException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}	
+			
+			numCategory++;
+			
+			if(numCategory == 2)
 			{
 				//send the same Data to all clients connected
 				for(ConnectionToClient client:clientList){
@@ -94,8 +101,8 @@ public class GameServer extends AbstractServer
 				}
 				numCategory=0;
 			}
-			else
-				numCategory++;						
+
+				
 		}
 
 		else if (arg0 instanceof GuessLetterData)
@@ -103,11 +110,15 @@ public class GameServer extends AbstractServer
 			GuessLetterData tempGuessData = (GuessLetterData) arg0;
 			//send the same Data to all clients connected
 			for(ConnectionToClient client:clientList){
-				try {
-					client.sendToClient(tempGuessData);
-				} catch (IOException e) {
-					e.printStackTrace();
+				if(!client.equals(arg1))
+				{
+					try {
+						client.sendToClient(tempGuessData);
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
 				}
+
 			}                  
 		}
 		else if (arg0 instanceof SwitchPlayer)
@@ -122,11 +133,9 @@ public class GameServer extends AbstractServer
 				}
 			}
 		}
-		
-		
+
+
 
 	}
 
 }
-
-
