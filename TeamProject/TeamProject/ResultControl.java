@@ -10,10 +10,10 @@ public class ResultControl {
 
 	// Private data fields for the container and chat client.
 		private JPanel container;
-		private PlayerClient client;
-		private JLabel Winner;
 	  private JLabel Player1Score;
 	  private JLabel Player2Score;
+	  private JLabel TopLabel;
+	  private PlayerClient client;
 
 		// Constructor for the login controller.
 		public ResultControl(JPanel container, PlayerClient client)
@@ -41,7 +41,16 @@ public class ResultControl {
 	      System.exit(0);
 	    }
 	  }
-	  ResultPanel resultPanel = (ResultPanel)container.getComponent(7);
 	  
+	  public void winner(GuessLetterData gld) {
+	   Player1Score.setText(Integer.toString(gld.getScore())); 
+	   Player2Score.setText(Integer.toString(gld.getScore_2()));
+	   TopLabel.setText("You are the Winner!");
+	  }
 	  
+	  public void loser(GuessLetterData gld) {
+	     Player1Score.setText(Integer.toString(gld.getScore_2())); 
+	     Player2Score.setText(Integer.toString(gld.getScore()));
+	     TopLabel.setText("You are the Loser!");
+	    }
 }
