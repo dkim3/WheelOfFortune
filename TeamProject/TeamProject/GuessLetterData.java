@@ -43,7 +43,8 @@ public class GuessLetterData {
 
 	public void setwordToGuess(String wordToGuess) {
 		this.wordToGuess = wordToGuess;
-		this.letterLeft = wordToGuess.length();
+
+		this.letterLeft = (int) wordToGuess.chars().distinct().count();
 
 	}
 
@@ -65,7 +66,6 @@ public class GuessLetterData {
 
 	public ArrayList<Character> getchosenLetter() {
 		return chosenLetter;
-		
 	}
 
 }
