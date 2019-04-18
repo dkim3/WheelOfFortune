@@ -20,6 +20,7 @@ public class GuessLetterPanel extends JPanel {
 	private JLabel guessinglbl;
 	private JLabel lblError;
 	private JLabel lblLettersSoFar;
+	private JButton btnGuess;
 
 	private JPanel Word_Panel;
 
@@ -65,14 +66,16 @@ public class GuessLetterPanel extends JPanel {
 		add(lblGuessALetter);
 
 		GuessTxtField = new JTextField();
+		GuessTxtField.setFont(new Font("Tahoma", Font.PLAIN, 29));
 		GuessTxtField.setBounds(104, 125, 71, 64);
 		add(GuessTxtField);
 		GuessTxtField.setColumns(10);
 		cc.setJTextField(GuessTxtField);
 
-		JButton btnGuess = new JButton("Guess");
+		btnGuess = new JButton("Guess");
 		btnGuess.setFont(new Font("Sylfaen", Font.PLAIN, 16));
 		btnGuess.setBounds(207, 125, 85, 64);
+		cc.setGuessButton(btnGuess);
 		add(btnGuess);
 		btnGuess.addActionListener(cc);
 
@@ -90,6 +93,8 @@ public class GuessLetterPanel extends JPanel {
 		add(lblPrice);
 
 		textField_Score = new JTextField();
+		textField_Score.setForeground(Color.BLACK);
+		textField_Score.setFont(new Font("Tahoma", Font.PLAIN, 29));
 		textField_Score.setBounds(21, 305, 96, 64);
 		textField_Score.setEditable(false);
 		cc.setTextField_Score(textField_Score);
@@ -97,8 +102,12 @@ public class GuessLetterPanel extends JPanel {
 		textField_Score.setColumns(10);
 
 		textField_Price = new JTextField();
+		textField_Price.setForeground(Color.BLACK);
+		textField_Price.setFont(new Font("Tahoma", Font.PLAIN, 26));
 		textField_Price.setColumns(10);
 		textField_Price.setBounds(296, 305, 96, 64);
+		textField_Price.setEditable(false);
+		cc.setTextField_Price(textField_Price);
 		add(textField_Price);
 
 		Word_Panel = new JPanel();
@@ -116,7 +125,7 @@ public class GuessLetterPanel extends JPanel {
 		lblLettersSoFar = new JLabel("letters");
 		lblLettersSoFar.setForeground(new Color(0, 0, 0));
 		lblLettersSoFar.setFont(new Font("Roland", Font.PLAIN, 18));
-		lblLettersSoFar.setBounds(31, 407, 244, 33);
+		lblLettersSoFar.setBounds(31, 407, 361, 33);
 		lblError.setVisible(false);
 		cc.setlblLettersSoFar(lblLettersSoFar);
 		add(lblLettersSoFar);
@@ -145,6 +154,8 @@ public class GuessLetterPanel extends JPanel {
 		add(lblOponentScore);
 
 		textFieldOponent = new JTextField();
+		textFieldOponent.setForeground(Color.BLACK);
+		textFieldOponent.setFont(new Font("Tahoma", Font.PLAIN, 29));
 		textFieldOponent.setColumns(10);
 		textFieldOponent.setBounds(137, 305, 96, 64);
 		textFieldOponent.setEditable(false);
@@ -157,6 +168,14 @@ public class GuessLetterPanel extends JPanel {
 		turnLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		turnLabel.setBounds(56, 80, 296, 35);
 		turnLabel.setVisible(false);
+		cc.setTurnLabel(turnLabel);
 		add(turnLabel);
+
+		JLabel label = new JLabel("$");
+		label.setHorizontalAlignment(SwingConstants.CENTER);
+		label.setFont(new Font("Tahoma", Font.PLAIN, 34));
+		label.setForeground(Color.BLACK);
+		label.setBounds(274, 302, 18, 67);
+		add(label);
 	}
 }
