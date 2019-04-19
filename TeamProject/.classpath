@@ -3,5 +3,6 @@
 	<classpathentry kind="src" path=""/>
 	<classpathentry kind="lib" path="C:/Users/Min/software-engineering/mysql-connector-java-5.1.40-bin.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Min/software-engineering/ocsf.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
