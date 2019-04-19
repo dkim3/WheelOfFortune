@@ -25,6 +25,11 @@ public class GameServer extends AbstractServer
   private JLabel status;
 
   //Constructor
+  public GameServer() {
+    super(8300);
+    clientList = new ArrayList<ConnectionToClient>();
+  }
+  
   public GameServer(int port) {
     super(port);
     clientList = new ArrayList<ConnectionToClient>();
