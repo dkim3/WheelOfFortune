@@ -100,7 +100,7 @@ public class PlayerClient extends AbstractClient
       CategoryData tempcategory = (CategoryData) arg0;
       spinWheelControl.startSpin();
       
-      GuessLetterData tempGuessLetterData;
+      GuessLetterData tempGuessLetterData = new GuessLetterData();
       tempGuessLetterData.setwordToGuess(tempcategory.getWord());      
       guessLetterControl.setGuessedLetterData(tempGuessLetterData);
     }
