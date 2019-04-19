@@ -1,20 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
 	<classpathentry kind="src" path=""/>
-<<<<<<< HEAD
 	<classpathentry kind="lib" path="C:/Users/Min/software-engineering/mysql-connector-java-5.1.40-bin.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Min/software-engineering/ocsf.jar"/>
-=======
-<<<<<<< HEAD
-	<classpathentry kind="lib" path="C:/Users/Dayo/git/TeamProject/TeamProject/mysql-connector-java-5.1.40-bin.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Dayo/git/TeamProject/TeamProject/ocsf.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Khanh/Desktop/softwareE/mysql-connector-java-5.1.40-bin.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Khanh/Desktop/softwareE/ocsf.jar"/>
-=======
-	<classpathentry kind="lib" path="C:/Users/Dayo/git/WheelOfFortune/TeamProject/mysql-connector-java-5.1.40-bin.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Dayo/git/WheelOfFortune/TeamProject/ocsf.jar"/>
->>>>>>> branch 'master' of https://github.com/dkim3/WheelOfFortune.git
->>>>>>> branch 'master' of https://github.com/dkim3/WheelOfFortune.git
-	<classpathentry kind="output" path=""/>
+	<classpathentry kind="output" path="bin"/>
 </classpath>
