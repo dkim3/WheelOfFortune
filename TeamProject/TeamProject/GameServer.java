@@ -131,12 +131,8 @@ public class GameServer extends AbstractServer
           }
         }
       }
-
     }
-
   }
-
-
 
   public void setLog(JTextArea log)
   {
