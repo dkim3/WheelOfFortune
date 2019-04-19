@@ -30,11 +30,8 @@ public class GuessLetterData {
 		this.score = score;
 	}
 
-	public GuessLetterData(char charAt, Integer price) {
+	public GuessLetterData() {
 		chosenLetter = new ArrayList<Character>();
-
-		this.chosenLetter.add(charAt);
-		this.prizeMoney = price;
 	}
 
 	public void setPrizeMoney(Integer prizeMoney) {

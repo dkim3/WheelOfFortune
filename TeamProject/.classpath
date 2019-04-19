@@ -4,5 +4,7 @@
 	<classpathentry kind="src" path=""/>
 	<classpathentry kind="lib" path="C:/Users/Dayo/git/TeamProject/TeamProject/mysql-connector-java-5.1.40-bin.jar"/>
 	<classpathentry kind="lib" path="C:/Users/Dayo/git/TeamProject/TeamProject/ocsf.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Khanh/Desktop/softwareE/mysql-connector-java-5.1.40-bin.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Khanh/Desktop/softwareE/ocsf.jar"/>
 	<classpathentry kind="output" path=""/>
 </classpath>
