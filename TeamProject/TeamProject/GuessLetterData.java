@@ -10,31 +10,29 @@ public class GuessLetterData {
 	private Integer score_2;
 	private Integer letterLeft;
 
-	public Integer getLetterLeft() {
-		return letterLeft;
+	public GuessLetterData() {
+		chosenLetter = new ArrayList<Character>();
+
 	}
+
 
 	public void setLetterLeft(Integer letterLeft) {
-		this.letterLeft = letterLeft;
-	}
+		this.letterLeft = letterLeft; }
 
 	public Integer getScore_2() {
-		return score_2;
-	}
-
-	public void setScore_2(Integer score_2) {
-		this.score_2 = score_2;
-	}
+		return score_2;	}
 
 	public void setScore(Integer score) {
 		this.score = score;
 	}
 
-	public GuessLetterData(char charAt, Integer price) {
+<<<<<<< HEAD
+	public GuessLetterData() {
 		chosenLetter = new ArrayList<Character>();
-
-		this.chosenLetter.add(charAt);
-		this.prizeMoney = price;
+=======
+	public void setScore_2(Integer score_2) {
+		this.score_2 = score_2;	
+>>>>>>> branch 'master' of https://github.com/dkim3/WheelOfFortune.git
 	}
 
 	public void setPrizeMoney(Integer prizeMoney) {
@@ -66,5 +64,9 @@ public class GuessLetterData {
 	public ArrayList<Character> getchosenLetter() {
 		return chosenLetter;
 	}
+	public Integer getLetterLeft() {
+		return letterLeft;
+	}
+
 
 }

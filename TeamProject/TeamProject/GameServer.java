@@ -1,14 +1,31 @@
 package TeamProject;
 
+import java.awt.Color;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
+
+import javax.swing.JLabel;
+import javax.swing.JTextArea;
 
 import ocsf.server.AbstractServer;
 import ocsf.server.ConnectionToClient;
 
 public class GameServer extends AbstractServer
 {
+<<<<<<< HEAD
+  private Database database;
+  private String[] category;
+  private CategoryData serverCategoryData;
+  private GuessLetterData guessLetterData;
+  private SwitchPlayer SwitchPlayer;
+  private Integer numCategory = 0;
+  private ArrayList<ConnectionToClient> clientList;
+=======
+	private JTextArea log;
+	private JLabel status;
+	
+	
 	private Database database;
 	private String [] category; 	
 	private CategoryData serverCategoryData;
@@ -16,67 +33,137 @@ public class GameServer extends AbstractServer
 	private SwitchPlayer SwitchPlayer;	
 	private Integer numCategory =0;	
 	
+>>>>>>> branch 'master' of https://github.com/dkim3/WheelOfFortune.git
 
+<<<<<<< HEAD
+  // Constructor
+  public GameServer(int port)
+  {
+    super(port);
+    clientList = new ArrayList<ConnectionToClient>();
+  }
+
+  public void clientConnected(ConnectionToClient client)
+  {
+    clientList.add(client);
+  }
+=======
 	private ArrayList<ConnectionToClient> clientList;
-
+	
+	public GameServer()
+	{
+		super(12345);
+	}
+	
 	//Constructor
 	public GameServer(int port) {
 		super(port);
 		clientList = new ArrayList<ConnectionToClient>();
+>>>>>>> branch 'master' of https://github.com/dkim3/WheelOfFortune.git
 
+<<<<<<< HEAD
+  protected void handleMessageFromClient(Object arg0, ConnectionToClient arg1)
+  {
+    // CREATE ACCOUNT
+    if (arg0 instanceof CreateAccountData)
+    {
+      try
+      {
+        String username = ((CreateAccountData) arg0).getUsername();
+        String password = ((CreateAccountData) arg0).getPassword();
+        if (database.addAccount(username, password))
+        {
+          arg1.sendToClient("Account Created");
+        } else
+        {
+          arg1.sendToClient("Same Username");
+        }
+      } catch (IOException | SQLException e)
+      {
+        e.printStackTrace();
+      }
+    }
+=======
+	}
+	
+	public void setLog(JTextArea log)
+	{
+		this.log = log;
 	}
 
+	public JTextArea getLog()
+	{
+		return log;
+	}
+
+	public void setStatus(JLabel status)
+	{
+		this.status = status;
+	}
+
+	public JLabel getStatus()
+	{
+		return status;
+	}
+
+>>>>>>> branch 'master' of https://github.com/dkim3/WheelOfFortune.git
+
+<<<<<<< HEAD
+    // LOGIN
+    else if (arg0 instanceof LoginData)
+    {
+      String username = ((LoginData) arg0).getUsername();
+      String password = ((LoginData) arg0).getPassword();
+      System.out.println("Login data is: " + username + " " + password);
+      try
+      {
+        if (database.verifyAccount(username, password))
+        {
+          arg1.sendToClient("Valid");
+        } else
+        {
+          arg1.sendToClient("Invalid");
+        }
+=======
 	public void clientConnected(ConnectionToClient client)
 	{
 		clientList.add(client);
+		log.append("Client "+ client.getId() +" Connected\n");
+		try {
+			client.sendToClient("username: Client-" + client.getId());
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
+>>>>>>> branch 'master' of https://github.com/dkim3/WheelOfFortune.git
 
-	protected void handleMessageFromClient(Object arg0, ConnectionToClient arg1)
-	{
-		//CREATE ACCOUNT
-		if (arg0 instanceof CreateAccountData)
-		{
-			System.out.println("chatserver createdata");
-			try
-			{
-				System.out.println("trying to create acc");
-				String username = ((CreateAccountData) arg0).getUsername();
-				String password = ((CreateAccountData) arg0).getPassword();
-				if (database.addAccount(username, password))
-				{
-					System.out.println("acc created success");
-					arg1.sendToClient("Account Created");
-				} else
-				{
-					System.out.println("erro or same username");
-					arg1.sendToClient("Same Username");
-					System.out.println("same username/pass");
-				}
-			} catch (IOException | SQLException e)
-			{  e.printStackTrace();}
-		}
+      } catch (IOException | SQLException e)
+      {
+        e.printStackTrace();
+      }
+    }
 
-		//LOGIN
-		else if (arg0 instanceof LoginData)
-		{
-			String username = ((LoginData) arg0).getUsername();
-			String password = ((LoginData) arg0).getPassword();
-			System.out.println("Login data is: " + username + " " + password);
-			try
-			{
-				if ( database.verifyAccount(username, password))
-				{
-					arg1.sendToClient("Valid");
-				}
-				else
-				{
-					arg1.sendToClient("Invalid");  
-				}
+    else if (arg0 instanceof CategoryData)
+    {
+      serverCategoryData = (CategoryData) arg0;
+      category[numCategory] = serverCategoryData.getCategory();
+      numCategory++;
 
-			} catch (IOException | SQLException e)
-			{e.printStackTrace();}
-		}
+      if (numCategory == 2)
+      {
+        int rand = (int) (Math.random() * ((1 - 0) + 1)) + 0; // choose number between 0 and 1
+        String choosenCategory = category[rand]; // choose random category between 2 players
 
+<<<<<<< HEAD
+        try
+        {
+          serverCategoryData.setWord(database.chooseWord(choosenCategory));
+        } catch (SQLException e1)
+        {
+          // TODO Auto-generated catch block
+          e1.printStackTrace();
+        }
+=======
 		else if (arg0 instanceof CategoryData)
 		{
 			serverCategoryData = (CategoryData) arg0;			
@@ -91,11 +178,10 @@ public class GameServer extends AbstractServer
 			try {
 				serverCategoryData.setWord(database.chooseWord(choosenCategory));
 			} catch (SQLException e1) {
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}	
 			
-				guessLetterData = new GuessLetterData ();
+				guessLetterData = new GuessLetterData();
 				guessLetterData.setwordToGuess(serverCategoryData.getWord());
 		
 				//send the same Data to all clients connected
@@ -110,30 +196,83 @@ public class GameServer extends AbstractServer
 				    }
 				    else
 				    {
-				    	clientsendToClient(guessLetterData);
+				    	try {
+							client.sendToClient(guessLetterData);
+						} catch (IOException e) {
+							e.printStackTrace();
+						}
+>>>>>>> branch 'master' of https://github.com/dkim3/WheelOfFortune.git
 
-				    }
-				}
-				numCategory=0;
-			}
+        guessLetterData = new GuessLetterData();
+        guessLetterData.setwordToGuess(serverCategoryData.getWord());
 
-				
-		}
+        // send the same Data to all clients connected
+        for (ConnectionToClient client : clientList)
+        {
+          if (client.equals(arg1))
+          {
+            try
+            {
+              client.sendToClient(serverCategoryData);
+            } catch (IOException e)
+            {
+              e.printStackTrace();
+            }
+          } else
+          {
+            try
+            {
+              client.sendToClient(guessLetterData);
+            } catch (IOException e)
+            {
+              // TODO Auto-generated catch block
+              e.printStackTrace();
+            }
 
-		else if (arg0 instanceof GuessLetterData)
-		{
-			GuessLetterData tempGuessData = (GuessLetterData) arg0;
-			//send the same Data to all clients connected
-			for(ConnectionToClient client:clientList){
-				if(!client.equals(arg1))
-				{
-					try {
-						client.sendToClient(tempGuessData);
-					} catch (IOException e) {
-						e.printStackTrace();
-					}
-				}
+          }
+        }
+        numCategory = 0;
+      }
 
+<<<<<<< HEAD
+    }
+
+    else if (arg0 instanceof GuessLetterData)
+    {
+      GuessLetterData tempGuessData = (GuessLetterData) arg0;
+      // send the same Data to all clients connected
+      for (ConnectionToClient client : clientList)
+      {
+        if (!client.equals(arg1))
+        {
+          try
+          {
+            client.sendToClient(tempGuessData);
+          } catch (IOException e)
+          {
+            e.printStackTrace();
+          }
+        }
+
+      }
+    } else if (arg0 instanceof SwitchPlayer)
+    {
+      SwitchPlayer = (SwitchPlayer) arg0;
+      // server received SwitchPlayer from client and process by switch the player
+      for (ConnectionToClient client : clientList)
+      {
+        try
+        {
+          client.sendToClient(SwitchPlayer);
+        } catch (IOException e)
+        {
+          e.printStackTrace();
+        }
+      }
+    }
+
+  }
+=======
 			}                  
 		}
 		else if (arg0 instanceof SwitchPlayer)
@@ -148,9 +287,50 @@ public class GameServer extends AbstractServer
 				}
 			}
 		}
+	}
+>>>>>>> branch 'master' of https://github.com/dkim3/WheelOfFortune.git
 
+	
+	
+	protected void listeningException(Throwable exception) 
+	{
+		//Display info about the exception
+		System.out.println("Listening Exception:" + exception);
+		exception.printStackTrace();
+		System.out.println(exception.getMessage());
 
-
+		/*if (this.isListening())
+    {
+      log.append("Server not Listening\n");
+      status.setText("Not Connected");
+      status.setForeground(Color.RED);
+    }*/
 	}
 
+	//Hook method = invoked by underlined system
+	//run when an exception occurs while the Server is listening for clients to connect
+	public void serverStarted() 
+	{
+		log.setText("Server Started\n");
+		status.setText("Listening");
+		status.setForeground(Color.green);
+	}
+
+	//Hook method = invoked by underlined system
+	public void serverStopped()
+	{
+		log.append("Server Stopped Accepting New Clients - Press Listen to Start Accepting New Clients\n");
+		status.setText("Stopped");
+		status.setForeground(Color.red);
+	}
+
+	//Hook method = invoked by underlined system
+	public void serverClosed()
+	{
+		log.append("Server and all current clients are closed - Press Listen to Restart\n");
+		status.setText("Close");
+		status.setForeground(Color.red);
+	}
+
+	
 }
