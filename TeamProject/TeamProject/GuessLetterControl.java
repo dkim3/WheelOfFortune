@@ -166,25 +166,36 @@ public class GuessLetterControl implements ActionListener {
 				lblError.setVisible(false);
 				turnLabel.setText("Your Turn!");
 				guessButton.setVisible(true);
-				data.setchosenLetter(guessLetterPanel.getLetter().charAt(0));
+				String tempLetter = guessLetterPanel.getLetter();
+				
+				if(data.getchosenLetter().contains(tempLetter) )
+				{
+					lblError.setText("Letter "+ tempLetter+ " is already guessed");
+					lblError.setVisible(true);
+					GuessedLetter.setText("");
+				}
+				else {
+					data.setchosenLetter(guessLetterPanel.getLetter().charAt(0));
 
-				if (data.getwordToGuess().contains(guessLetterPanel.getLetter())) {
-					data.setScore(data.getPrizeMoney() + data.getScore());
-					data.setLetterLeft(data.getLetterLeft() - 1);
-					updateDisplay(data);
-					try {
-						client.sendToServer(data);
-					} catch (IOException e) {
-						e.printStackTrace();
-					}
-				} else
-					try {
-						switchPlayer.setLettersSoFar(data.getchosenLetter());
-						client.sendToServer(switchPlayer);
-					} catch (IOException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					}
+					if (data.getwordToGuess().contains(guessLetterPanel.getLetter())) {
+						data.setScore(data.getPrizeMoney() + data.getScore());
+						data.setLetterLeft(data.getLetterLeft() - 1);
+						updateDisplay(data);
+						try {
+							client.sendToServer(data);
+						} catch (IOException e) {
+							e.printStackTrace();
+						}
+					} else
+						try {
+							switchPlayer.setLettersSoFar(data.getchosenLetter());
+							client.sendToServer(switchPlayer);
+						} catch (IOException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+				}
+				
 
 				// displayPanel.add(guessinglbl,BorderLayout.CENTER);
 			} else if (guessLetterPanel.getLetter() == "") {

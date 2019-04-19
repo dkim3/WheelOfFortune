@@ -89,6 +89,7 @@ public class PlayerClient extends AbstractClient
     }
     else if (((String) arg0).equals("Valid")) 
     {
+    	System.out.println("login success");
       loginControl.loginSuccess();   //Login -> SelectCategory screen
     }
     else if (((String) arg0).equals("Invalid")) 
