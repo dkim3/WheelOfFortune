@@ -13,6 +13,7 @@ import ocsf.server.ConnectionToClient;
 
 public class GameServer extends AbstractServer
 {
+<<<<<<< HEAD
   private Database database;
   private String[] category;
   private CategoryData serverCategoryData;
@@ -20,6 +21,7 @@ public class GameServer extends AbstractServer
   private SwitchPlayer SwitchPlayer;
   private Integer numCategory = 0;
   private ArrayList<ConnectionToClient> clientList;
+=======
 	private JTextArea log;
 	private JLabel status;
 	
