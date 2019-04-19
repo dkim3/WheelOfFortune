@@ -85,7 +85,7 @@ public class PlayerClient extends AbstractClient
       GuessLetterData tempGuessData = (GuessLetterData) arg0;
       if (tempGuessData.getLetterLeft() == 0)
       {
-        resultControl.display(tempGuessData);
+        resultControl.loser(tempGuessData);
       }
         //when player receive GuessLetterData which mean he get it wrong
       guessLetterControl.waitScreen(tempGuessData);
