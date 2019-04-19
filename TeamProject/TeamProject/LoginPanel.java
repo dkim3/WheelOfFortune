@@ -64,7 +64,7 @@ public class LoginPanel extends JPanel
     loginPanel.add(usernameLabel);
     loginPanel.add(usernameField);
     loginPanel.add(passwordLabel);
-    loginPanel.add(passwordField);
+    loginPanel.add(passwordField); 
     
     // Create a panel for the buttons.
     JPanel buttonPanel = new JPanel();
