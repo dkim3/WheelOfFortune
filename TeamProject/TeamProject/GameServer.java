@@ -1,14 +1,22 @@
 package TeamProject;
 
+import java.awt.Color;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.ArrayList;
+
+import javax.swing.JLabel;
+import javax.swing.JTextArea;
 
 import ocsf.server.AbstractServer;
 import ocsf.server.ConnectionToClient;
 
 public class GameServer extends AbstractServer
 {
+	private JTextArea log;
+	private JLabel status;
+	
+	
 	private Database database;
 	private String [] category; 	
 	private CategoryData serverCategoryData;
@@ -18,17 +26,49 @@ public class GameServer extends AbstractServer
 	
 
 	private ArrayList<ConnectionToClient> clientList;
-
+	
+	public GameServer()
+	{
+		super(12345);
+	}
+	
 	//Constructor
 	public GameServer(int port) {
 		super(port);
 		clientList = new ArrayList<ConnectionToClient>();
 
 	}
+	
+	public void setLog(JTextArea log)
+	{
+		this.log = log;
+	}
+
+	public JTextArea getLog()
+	{
+		return log;
+	}
+
+	public void setStatus(JLabel status)
+	{
+		this.status = status;
+	}
+
+	public JLabel getStatus()
+	{
+		return status;
+	}
+
 
 	public void clientConnected(ConnectionToClient client)
 	{
 		clientList.add(client);
+		log.append("Client "+ client.getId() +" Connected\n");
+		try {
+			client.sendToClient("username: Client-" + client.getId());
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	protected void handleMessageFromClient(Object arg0, ConnectionToClient arg1)
@@ -91,11 +131,10 @@ public class GameServer extends AbstractServer
 			try {
 				serverCategoryData.setWord(database.chooseWord(choosenCategory));
 			} catch (SQLException e1) {
-				// TODO Auto-generated catch block
 				e1.printStackTrace();
 			}	
 			
-				guessLetterData = new GuessLetterData ();
+				guessLetterData = new GuessLetterData();
 				guessLetterData.setwordToGuess(serverCategoryData.getWord());
 		
 				//send the same Data to all clients connected
@@ -110,7 +149,11 @@ public class GameServer extends AbstractServer
 				    }
 				    else
 				    {
-				    	clientsendToClient(guessLetterData);
+				    	try {
+							client.sendToClient(guessLetterData);
+						} catch (IOException e) {
+							e.printStackTrace();
+						}
 
 				    }
 				}
@@ -148,9 +191,49 @@ public class GameServer extends AbstractServer
 				}
 			}
 		}
-
-
-
 	}
 
+	
+	
+	protected void listeningException(Throwable exception) 
+	{
+		//Display info about the exception
+		System.out.println("Listening Exception:" + exception);
+		exception.printStackTrace();
+		System.out.println(exception.getMessage());
+
+		/*if (this.isListening())
+    {
+      log.append("Server not Listening\n");
+      status.setText("Not Connected");
+      status.setForeground(Color.RED);
+    }*/
+	}
+
+	//Hook method = invoked by underlined system
+	//run when an exception occurs while the Server is listening for clients to connect
+	public void serverStarted() 
+	{
+		log.setText("Server Started\n");
+		status.setText("Listening");
+		status.setForeground(Color.green);
+	}
+
+	//Hook method = invoked by underlined system
+	public void serverStopped()
+	{
+		log.append("Server Stopped Accepting New Clients - Press Listen to Start Accepting New Clients\n");
+		status.setText("Stopped");
+		status.setForeground(Color.red);
+	}
+
+	//Hook method = invoked by underlined system
+	public void serverClosed()
+	{
+		log.append("Server and all current clients are closed - Press Listen to Restart\n");
+		status.setText("Close");
+		status.setForeground(Color.red);
+	}
+
+	
 }
