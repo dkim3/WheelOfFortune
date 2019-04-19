@@ -17,36 +17,61 @@ public class PlayerClient extends AbstractClient
   private ResultControl resultControl;
 
   //Constructor
-  public PlayerClient() {super("localhost",8300);}
-  public PlayerClient(String host, int port) {super(host,port);}
+  public PlayerClient() {
+    super("localhost",8300);
+  }
+  public PlayerClient(String host, int port) {
+    super(host,port);
+    }
 
-  public InitialControl getInitialControl() {return InitialControl;}
+  public InitialControl getInitialControl() {
+    return InitialControl;
+  }
   public void setInitialControl(InitialControl initialControl) {
-    InitialControl = initialControl;}
+    InitialControl = initialControl;
+    }
   
-  public LoginControl getLoginControl() {return loginControl;}
+  public LoginControl getLoginControl() {
+    return loginControl;
+  }
   public void setLoginControl(LoginControl loginControl) {
-    this.loginControl = loginControl;}
+    this.loginControl = loginControl;
+    }
   
-  public CreateAccountControl getCreateAccountControl() {return createAccountControl; }
+  public CreateAccountControl getCreateAccountControl() {
+    return createAccountControl;
+    }
   public void setCreateAccountControl(CreateAccountControl createAccountControl) {
-    this.createAccountControl = createAccountControl;}
+    this.createAccountControl = createAccountControl;
+    }
   
-  public GuessLetterControl getGuessLetterControl() {return guessLetterControl;}
+  public GuessLetterControl getGuessLetterControl() {
+    return guessLetterControl;
+  }
   public void setGuessLetterControl(GuessLetterControl guessLetterControl) {
-    this.guessLetterControl = guessLetterControl;}
+    this.guessLetterControl = guessLetterControl;
+    }
   
-  public SpinWheelControl getSpinWheelControl() {return spinWheelControl;}
+  public SpinWheelControl getSpinWheelControl() {
+    return spinWheelControl;
+  }
   public void setSpinWheelControl(SpinWheelControl spinWheelControl) {
-    this.spinWheelControl = spinWheelControl;}
+    this.spinWheelControl = spinWheelControl;
+    }
   
-  public ChooseCategoryControl getChooseCategoryControl() {return chooseCategoryControl;}
+  public ChooseCategoryControl getChooseCategoryControl() {
+    return chooseCategoryControl;
+    }
   public void setChooseCategoryControl(ChooseCategoryControl chooseCategoryControl) {
-    this.chooseCategoryControl = chooseCategoryControl;}
+    this.chooseCategoryControl = chooseCategoryControl;
+    }
   
-  public ResultControl getResultControl() {return resultControl;}
+  public ResultControl getResultControl() {
+    return resultControl;
+  }
   public void setResultControl( ResultControl resultControl ) {
-    this.resultControl = resultControl;}
+    this.resultControl = resultControl;
+    }
   
   
 
@@ -75,7 +100,7 @@ public class PlayerClient extends AbstractClient
       CategoryData tempcategory = (CategoryData) arg0;
       spinWheelControl.startSpin();
       
-      GuessLetterData tempGuessLetterData;
+      GuessLetterData tempGuessLetterData = new ;
       tempGuessLetterData.setwordToGuess(tempcategory.getWord());      
       guessLetterControl.setGuessedLetterData(tempGuessLetterData);
     }
