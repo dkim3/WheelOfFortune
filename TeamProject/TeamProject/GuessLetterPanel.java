@@ -126,14 +126,12 @@ public class GuessLetterPanel extends JPanel {
 		lblLettersSoFar.setForeground(new Color(0, 0, 0));
 		lblLettersSoFar.setFont(new Font("Roland", Font.PLAIN, 18));
 		lblLettersSoFar.setBounds(31, 407, 361, 33);
-		lblError.setVisible(false);
 		cc.setlblLettersSoFar(lblLettersSoFar);
 		add(lblLettersSoFar);
 
 		guessinglbl = new JLabel("Word with correct letters");
 		guessinglbl.setForeground(Color.WHITE);
 		guessinglbl.setFont(new Font("Tahoma", Font.BOLD, 36));
-		lblError.setVisible(false);
 		cc.setGuessinglbl(guessinglbl);
 		Word_Panel.add(guessinglbl, BorderLayout.CENTER);
 

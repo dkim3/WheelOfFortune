@@ -1,91 +1,85 @@
-//Shiraj Manandhar
-
 package TeamProject;
 
-import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JPasswordField;
-import javax.swing.JTextField;
-
-
 import java.awt.*;
+import javax.swing.*;
+import java.awt.event.*;
 
-public class LoginPanel extends JPanel {
-	private JTextField Uernametxt;
-	private JTextField Passwordtxt;
-	  private JLabel errorLabel;
-
+public class LoginPanel extends JPanel
+{
+  // Private data fields for the important GUI components.
+  private JTextField usernameField;
+  private JPasswordField passwordField;
+  private JLabel errorLabel;
+  
+  // Getter for the text in the username field.
+  public String getUsername()
+  {
+    return usernameField.getText();
+  }
+  
+  // Getter for the text in the password field.
+  public String getPassword()
+  {
+    return new String(passwordField.getPassword());
+  }
+  
+	public void setPassword(String passoword)
+	{
+		passwordField.setText(passoword);
+	}
 
 	// Getter for the text in the verifyPassword field.
 	public void setuserName(String userName)
 	{
-		Uernametxt.setText(userName);
+		usernameField.setText(userName);
 	}
-	public void setPassword(String passoword)
-	{
-		Passwordtxt.setText(passoword);
-	}
+  
+  // Setter for the error text.
+  public void setError(String error)
+  {
+    errorLabel.setText(error);
+  }
+  
+  // Constructor for the login panel.
+  public LoginPanel(LoginControl lc)
+  {
+    // Create the controller and set it in the chat client.
+    //LoginControl controller = new LoginControl(container, client);
+    //client.setLoginControl(controller);
+        
+    // Create a panel for the labels at the top of the GUI.
+    JPanel labelPanel = new JPanel(new GridLayout(2, 1, 5, 5));
+    errorLabel = new JLabel("", JLabel.CENTER);
+    errorLabel.setForeground(Color.RED);
+    JLabel instructionLabel = new JLabel("Enter your username and password to log in.", JLabel.CENTER);
+    labelPanel.add(errorLabel);
+    labelPanel.add(instructionLabel);
 
-	// Getter for the text in the username field.
-	public String getUsername()
-	{
-		return Uernametxt.getText();
-	}
+    // Create a panel for the login information form.
+    JPanel loginPanel = new JPanel(new GridLayout(2, 2, 5, 5));
+    JLabel usernameLabel = new JLabel("Username:", JLabel.RIGHT);
+    usernameField = new JTextField(10);
+    JLabel passwordLabel = new JLabel("Password:", JLabel.RIGHT);
+    passwordField = new JPasswordField(10);
+    loginPanel.add(usernameLabel);
+    loginPanel.add(usernameField);
+    loginPanel.add(passwordLabel);
+    loginPanel.add(passwordField);
+    
+    // Create a panel for the buttons.
+    JPanel buttonPanel = new JPanel();
+    JButton submitButton = new JButton("Submit");
+    submitButton.addActionListener(lc);
+    JButton cancelButton = new JButton("Cancel");
+    cancelButton.addActionListener(lc);    
+    buttonPanel.add(submitButton);
+    buttonPanel.add(cancelButton);
 
-	// Getter for the text in the password field.
-	public String getPassword()
-	{
-		return Passwordtxt.getText();
-	}
-	
-	 public void setError(String error)
-	  {
-	    errorLabel.setText(error);
-	  }
-
-	
-	//Constructor
-	public LoginPanel(LoginControl lc) {
-		setLayout(null);
-
-		JLabel TopLable = new JLabel("Enter Username/Password");
-		TopLable.setFont(new Font("Berlin Sans FB", Font.PLAIN, 20));
-		TopLable.setBounds(71, 34, 259, 29);
-		add(TopLable);
-
-		JLabel Username = new JLabel("Username:");
-		Username.setFont(new Font("Berlin Sans FB", Font.PLAIN, 14));
-		Username.setBounds(51, 132, 110, 14);
-		add(Username);
-
-		Uernametxt = new JTextField();
-		Uernametxt.setBounds(123, 130, 185, 20);
-		add(Uernametxt);
-		Uernametxt.setColumns(10);
-
-		JLabel Password = new JLabel("Password:");
-		Password.setFont(new Font("Berlin Sans FB", Font.PLAIN, 14));
-		Password.setBounds(51, 177, 71, 14);
-		add(Password);
-
-		Passwordtxt = new JTextField();
-		Passwordtxt.setBounds(123, 175, 185, 20);
-		add(Passwordtxt);
-		Passwordtxt.setColumns(10);
-
-		JButton submitButton = new JButton("Submit");
-		submitButton.addActionListener(lc);
-		submitButton.setBounds(51, 271, 89, 23);
-		add(submitButton);
-
-		JButton cancelButton = new JButton("Cancel");
-		cancelButton.addActionListener(lc);
-		cancelButton.setBounds(219, 271, 89, 23);
-		add(cancelButton);
-
-
-
-	}
-
+    // Arrange the three panels in a grid.
+    JPanel grid = new JPanel(new GridLayout(3, 1, 0, 10));
+    grid.add(labelPanel);
+    grid.add(loginPanel);
+    grid.add(buttonPanel);
+    this.add(grid);
+  }
 }
