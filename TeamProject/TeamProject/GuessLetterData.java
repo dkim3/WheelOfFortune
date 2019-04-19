@@ -13,7 +13,35 @@ public class GuessLetterData {
 	public GuessLetterData() {
 		chosenLetter = new ArrayList<Character>();
 	}
-	public void setScore_2(Integer score_2) {
+	public String getWordToGuess()
+  {
+    return wordToGuess;
+  }
+  public void setWordToGuess(String wordToGuess)
+  {
+    this.wordToGuess = wordToGuess;
+  }
+  public ArrayList<Character> getChosenLetter()
+  {
+    return chosenLetter;
+  }
+  public void setChosenLetter(ArrayList<Character> chosenLetter)
+  {
+    this.chosenLetter = chosenLetter;
+  }
+  public Integer getScore_2()
+  {
+    return score_2;
+  }
+  public void setScore(Integer score)
+  {
+    this.score = score;
+  }
+  public void setLetterLeft(Integer letterLeft)
+  {
+    this.letterLeft = letterLeft;
+  }
+  public void setScore_2(Integer score_2) {
 		this.score_2 = score_2;	
 	}
 
