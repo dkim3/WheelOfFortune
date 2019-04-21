@@ -96,6 +96,7 @@ public class GuessLetterPanel extends JPanel {
 		textField_Score.setForeground(Color.BLACK);
 		textField_Score.setFont(new Font("Tahoma", Font.PLAIN, 29));
 		textField_Score.setBounds(21, 305, 96, 64);
+		textField_Score.setEditable(false);
 		cc.setTextField_Score(textField_Score);
 		add(textField_Score);
 		textField_Score.setColumns(10);
@@ -105,9 +106,7 @@ public class GuessLetterPanel extends JPanel {
 		textField_Price.setFont(new Font("Tahoma", Font.PLAIN, 26));
 		textField_Price.setColumns(10);
 		textField_Price.setBounds(296, 305, 96, 64);
-		
-		GuessLetterData gld = new GuessLetterData();
-		textField_Price.setText("$" + gld.getPrizeMoney());
+		cc.setTextField_Price(textField_Price);
 		add(textField_Price);
 
 		Word_Panel = new JPanel();
@@ -140,6 +139,7 @@ public class GuessLetterPanel extends JPanel {
 		lblError.setForeground(Color.RED);
 		lblError.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblError.setBounds(30, 47, 328, 33);
+//		lblError.setVisible(false);
 		cc.setlblError(lblError);
 		add(lblError);
 
@@ -155,20 +155,18 @@ public class GuessLetterPanel extends JPanel {
 		textFieldOponent.setFont(new Font("Tahoma", Font.PLAIN, 29));
 		textFieldOponent.setColumns(10);
 		textFieldOponent.setBounds(137, 305, 96, 64);
-		textFieldOponent.setEditable(false);
 		cc.setOpponent_Score(textFieldOponent);
 		add(textFieldOponent);
 
-		turnLabel = new JLabel("Who's turn?\r\n");
+		turnLabel = new JLabel("Who's turn?");
 		turnLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		turnLabel.setForeground(Color.RED);
 		turnLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		turnLabel.setBounds(56, 80, 296, 35);
-		turnLabel.setVisible(false);
 		cc.setTurnLabel(turnLabel);
 		add(turnLabel);
 
-		JLabel label = new JLabel("$");
+		JLabel label = new JLabel("'money$ ");
 		label.setHorizontalAlignment(SwingConstants.CENTER);
 		label.setFont(new Font("Tahoma", Font.PLAIN, 34));
 		label.setForeground(Color.BLACK);

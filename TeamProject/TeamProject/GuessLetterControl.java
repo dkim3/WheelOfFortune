@@ -287,12 +287,10 @@ public class GuessLetterControl implements ActionListener {
 		CardLayout cardLayout = (CardLayout) container.getLayout(); // send user to guess letter panel
 		cardLayout.show(container, "6");
 
-		
 		guessButton.setVisible(false);
 		GuessedLetter.setEditable(false);
 		
 		turnLabel.setText("Opponent Turn");
-
 	}
 
 }

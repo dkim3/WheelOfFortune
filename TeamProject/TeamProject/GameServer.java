@@ -144,6 +144,9 @@ public class GameServer extends AbstractServer
 				SwitchPlayer tempswitchPlayer =  new SwitchPlayer();
 //				guessLetterData.setWordToGuess(wordToGuess);
 				
+				TempData tempData =  new TempData();
+
+				
 				for (ConnectionToClient client : clientList)
 				{
 					try
@@ -152,8 +155,11 @@ public class GameServer extends AbstractServer
 						{//for some reason the socket disappear if send guessData to client
 							client.sendToClient(serverCategoryData);
 						}
-						else
-							client.sendToClient(tempGuessData);
+						else {
+							client.getStackTrace();
+							client.sendToClient(tempData);
+							clientList.add(client);
+						}
 					} catch (IOException e)
 					{e.printStackTrace();	}
 
