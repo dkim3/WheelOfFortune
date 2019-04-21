@@ -96,7 +96,6 @@ public class GuessLetterPanel extends JPanel {
 		textField_Score.setForeground(Color.BLACK);
 		textField_Score.setFont(new Font("Tahoma", Font.PLAIN, 29));
 		textField_Score.setBounds(21, 305, 96, 64);
-		textField_Score.setEditable(false);
 		cc.setTextField_Score(textField_Score);
 		add(textField_Score);
 		textField_Score.setColumns(10);
@@ -106,7 +105,6 @@ public class GuessLetterPanel extends JPanel {
 		textField_Price.setFont(new Font("Tahoma", Font.PLAIN, 26));
 		textField_Price.setColumns(10);
 		textField_Price.setBounds(296, 305, 96, 64);
-		textField_Price.setEditable(false);
 		
 		GuessLetterData gld = new GuessLetterData();
 		textField_Price.setText("$" + gld.getPrizeMoney());
@@ -137,12 +135,11 @@ public class GuessLetterPanel extends JPanel {
 		cc.setGuessinglbl(guessinglbl);
 		Word_Panel.add(guessinglbl, BorderLayout.CENTER);
 
-		lblError = new JLabel("Error Messages");
+		lblError = new JLabel();
 		lblError.setHorizontalAlignment(SwingConstants.CENTER);
 		lblError.setForeground(Color.RED);
 		lblError.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		lblError.setBounds(30, 47, 328, 33);
-		lblError.setVisible(false);
 		cc.setlblError(lblError);
 		add(lblError);
 

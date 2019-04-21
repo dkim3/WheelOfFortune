@@ -177,7 +177,6 @@ public class GuessLetterControl implements ActionListener {
 			else if (guessLetterPanel.getLetter().length() == 1) {
 
 				// GuessTxtField.getT
-				lblError.setVisible(false);
 				turnLabel.setText("Your Turn!");
 				guessButton.setVisible(true);
 				Character tempLetter = guessLetterPanel.getLetter().charAt(0);
