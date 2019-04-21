@@ -104,7 +104,6 @@ public class GameServer extends AbstractServer
 
 				}
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
@@ -126,7 +125,7 @@ public class GameServer extends AbstractServer
 
 				int random = (int)(Math.random() * (  (numCategory - numCategory-2) + 1) + numCategory-2 ); // choose number between 0 and 1
 				String choosenCategory = category.get(random); // choose random category between 2 players
-				numCategory=0;
+//				numCategory=0;
 				String wordToGuess = "";
 				try
 				{
@@ -146,23 +145,23 @@ public class GameServer extends AbstractServer
 				
 				TempData tempData =  new TempData();
 
-				
-				for (ConnectionToClient client : clientList)
+				clientList.size();
+				for(int i = clientList.size()-1; i< clientList.size(); i++)
 				{
+					ConnectionToClient tempclient =clientList.get(i);
 					try
 					{
-						if (client.equals(arg1))
+						if (tempclient.equals(arg1))
 						{//for some reason the socket disappear if send guessData to client
-							client.sendToClient(serverCategoryData);
+							tempclient.sendToClient(serverCategoryData);
 						}
 						else {
-							client.getStackTrace();
-							client.sendToClient(tempData);
-							clientList.add(client);
+							tempclient.getStackTrace();
+							tempclient.sendToClient(tempGuessData);
+//							clientList.add(client);
 						}
 					} catch (IOException e)
 					{e.printStackTrace();	}
-
 				}
 			}
 		}
