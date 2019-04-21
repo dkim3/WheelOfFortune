@@ -113,20 +113,19 @@ public class GuessLetterControl implements ActionListener {
 		String answer = Data.getwordToGuess();
 
 		ArrayList<Character> displayAnswer = new ArrayList<>();
-		Character correctletter = letters.get(letters.size());
+		Character correctletter = letters.get(letters.size()-1);
 
-		Integer index = answer.indexOf(letters.get(letters.size()).toString());
-		if (letters.size() == 0) {
-			for (int x = 0; x < answer.length(); x++) {
+		Integer index = answer.indexOf(correctletter)+1;
+		
+		for(int i = 0; i< answer.length();i++)
+		{
+			char a = answer.charAt(i);
+			if(letters.contains(a))
+				displayAnswer.add(a);
+			else
 				displayAnswer.add('_');
-			}
-		} else if (answer.contains(letters.get(letters.size()).toString())) {
-
-			displayAnswer.set(index, correctletter);
-		} else {
-			displayAnswer = wordToDisplay;
-
 		}
+
 
 		this.wordToDisplay = displayAnswer;
 
@@ -150,106 +149,149 @@ public class GuessLetterControl implements ActionListener {
 		this.client = client;
 	}
 
+	@SuppressWarnings("static-access")
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		// TODO Auto-generated method stub
 
 		// Get the username and password the user entered.
-		GuessLetterPanel guessLetterPanel = (GuessLetterPanel) container.getComponent(4);
-
+		GuessLetterPanel guessLetterPanel = (GuessLetterPanel) container.getComponent(5);
+		data.setPrizeMoney(guessLetterPanel.getPrice());
 		String command = arg0.getActionCommand();
 
 		if (command == "Guess") {
-			if (guessLetterPanel.getLetter().length() == 1) {
+
+			//if player didn't enter anything
+			if (guessLetterPanel.getLetter() == "") {
+				lblError.setText("Please enter a letter");
+				lblError.setVisible(true);
+				GuessedLetter.setText("");
+			}
+			//if player entered more than one character
+			else if (guessLetterPanel.getLetter().length() > 1) {
+				lblError.setText("Please enter only one letter");
+				lblError.setVisible(true);
+				GuessedLetter.setText("");
+			}
+			//if player entered on character
+			else if (guessLetterPanel.getLetter().length() == 1) {
 
 				// GuessTxtField.getT
 				lblError.setVisible(false);
 				turnLabel.setText("Your Turn!");
 				guessButton.setVisible(true);
-				String tempLetter = guessLetterPanel.getLetter();
-				
-				if(data.getchosenLetter().contains(tempLetter) )
+				Character tempLetter = guessLetterPanel.getLetter().charAt(0);
+
+				//check if the input is not a character
+				if(! Character.isLetter(tempLetter) )
 				{
-					lblError.setText("Letter "+ tempLetter+ " is already guessed");
+					lblError.setText("Please enter a valid character (a-z)");
 					lblError.setVisible(true);
 					GuessedLetter.setText("");
 				}
+				//input is a valid character
 				else {
-					data.setchosenLetter(guessLetterPanel.getLetter().charAt(0));
+					//if the character is already been chosen before
+					if(data.getchosenLetter().contains(tempLetter) )
+					{
+						lblError.setText("Letter "+ tempLetter+ " is already guessed before ");
+						lblError.setVisible(true);
+						GuessedLetter.setText("");
+					}
+					//input is a new character
+					else {
+						data.setchosenLetter(tempLetter);
+						
+						//input is right
+						if (data.getwordToGuess().contains(tempLetter.toString() )) {
+							lblError.setVisible(true);
+							lblError.setText("Wowww your guess it right ");
+							
+							GuessedLetter.setText("");
 
-					if (data.getwordToGuess().contains(guessLetterPanel.getLetter())) {
-						data.setScore(data.getPrizeMoney() + data.getScore());
-						data.setLetterLeft(data.getLetterLeft() - 1);
-						updateDisplay(data);
-						try {
-							client.sendToServer(data);
-						} catch (IOException e) {
-							e.printStackTrace();
+							data.setScore(data.getPrizeMoney() + data.getScore());
+							data.setLetterLeft(data.getLetterLeft() - 1);
+							
+							updateDisplay(data);
+							
+							
+							try {
+								Thread.sleep(3000);
+								client.sendToServer(data);
+							} catch (IOException | InterruptedException e) {
+								e.printStackTrace();
+							}
+							
+							// user have to spin the wheel again
+							SpinWheelPanel spinPanel = (SpinWheelPanel) container.getComponent(4);
+							spinPanel.startSpin();
+
+							CardLayout cardLayout = (CardLayout) container.getLayout(); 
+							cardLayout.show(container, "5");
 						}
-					} else
-						try {
-							switchPlayer.setLettersSoFar(data.getchosenLetter());
-							client.sendToServer(switchPlayer);
-						} catch (IOException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
+						
+						//input is wrong and going to switch user
+						else
+						{
+							lblError.setText("Too bad you are wrong");
+
+							GuessedLetter.setText("");
+							updateDisplay(data);
+							waitScreen();
+
+							try {
+								SwitchPlayer tempswitchPlayer = new SwitchPlayer();
+								
+								tempswitchPlayer.setLettersSoFar(data.getchosenLetter());
+								System.out.println("going to send switch plaer from client to server");
+								client.sendToServer(tempswitchPlayer);
+//								Thread.currentThread().();
+							} catch (IOException e) {
+								e.printStackTrace();
+							}
 						}
+					}
+
 				}
-				
 
-				// displayPanel.add(guessinglbl,BorderLayout.CENTER);
-			} else if (guessLetterPanel.getLetter() == "") {
-				lblError.setText("Please enter a letter");
-				lblError.setVisible(true);
-				GuessedLetter.setText("");
-
-			} else if (guessLetterPanel.getLetter().length() > 1) {
-				lblError.setText("Please enter only one letter");
-				lblError.setVisible(true);
-				GuessedLetter.setText("");
 			}
-
 		}
+
 	}
 
 	//
 	public void updateDisplay(GuessLetterData Data) {
 
-		setWord(data);
+		setWord(Data);
 
 		textField_Score.setText(Data.getScore().toString());
-
-		textField_Price.setText(Data.getPrizeMoney().toString());
-
-		opponent_Score.setText(Data.getScore().toString());
-
-		lbl = wordToDisplay.toString();
-		guessinglbl.setText(lbl);
-		guessinglbl.setForeground(Color.WHITE);
-		guessinglbl.setFont(new Font("Tahoma", Font.BOLD, 36));
-		guessinglbl.setVisible(true);
-
-		// set the word with the right guessed letters so far
-		guessinglbl.setText(Data.getwordToGuess().toString());
-		lblLettersSoFar.setText(Data.getchosenLetter().toString());
-		lblLettersSoFar.setVisible(true);
-
-//		GuessLetterPanel guessLetterPannel = (GuessLetterPanel) container.getComponent(2);
-//
-//		guessLetterPannel.setTextField_Price(data.getPrizeMoney());
-
-	}
-
-	public void waitScreen(GuessLetterData Data) {
-		// Show the results. The winner.
-		textField_Score.setText(Data.getScore().toString());
-
 		opponent_Score.setText(Data.getScore_2().toString());
 
 		textField_Price.setText(Data.getPrizeMoney().toString());
 
+
+		lbl = wordToDisplay.toString();
+		guessinglbl.setVisible(true);
+
+		// set the word with the right guessed letters so far
+		guessinglbl.setText(wordToDisplay.toString());
+		
+		lblLettersSoFar.setText(Data.getchosenLetter().toString());
+		lblLettersSoFar.setVisible(true);
+
+
+
+	}
+
+	public void waitScreen() {
+
+		CardLayout cardLayout = (CardLayout) container.getLayout(); // send user to guess letter panel
+		cardLayout.show(container, "6");
+
+		
 		guessButton.setVisible(false);
 		GuessedLetter.setEditable(false);
+		
 		turnLabel.setText("Opponent Turn");
 
 	}

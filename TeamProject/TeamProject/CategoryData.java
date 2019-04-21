@@ -1,6 +1,8 @@
 package TeamProject;
 
-public class CategoryData
+import java.io.Serializable;
+
+public class CategoryData implements Serializable 
 {
 
   private String word;

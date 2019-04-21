@@ -18,6 +18,8 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.ScrollPaneConstants;
 
+
+
 public class ServerGUI extends JFrame
 {
 	//Data Fields go here
@@ -137,10 +139,14 @@ public class ServerGUI extends JFrame
 		south.add(quit);
 		
 		this.add(south,BorderLayout.SOUTH);
+		
+		Database database = new Database();
 
 		server = new GameServer();
 		server.setLog(log);
 		server.setStatus(status);
+		server.setDatabase(database);
+
 		
 		listen.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {

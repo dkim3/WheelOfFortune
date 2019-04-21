@@ -180,7 +180,7 @@ public class Database
 
     Integer randomNum = rand.nextInt(5);
 
-    String select_words = "select words, hints from " + category +";";
+    String select_words = "select words, hints from " + category ;
     ArrayList<String> words_from_db = new ArrayList<String>();
     words_from_db = query(select_words);
 

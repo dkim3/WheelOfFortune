@@ -42,7 +42,12 @@ public class PlayerGUI extends JFrame
 		
 		ResultControl rc = new ResultControl(container,clients);
 
-
+		clients.setLoginControl(lc);
+		clients.setCreateAccountControl(cac);
+		clients.setChooseCategoryControl(ccc);
+		clients.setSpinWheelControl(swc);
+		clients.setGuessLetterControl(glc);
+		clients.setResultControl(rc);
 
 
 		// Create the four views. (need the controller to register with the Panels

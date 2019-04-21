@@ -32,7 +32,7 @@ public class CreateAccountControl implements ActionListener
 		{
 			CardLayout cardLayout = (CardLayout)container.getLayout();
 			cardLayout.show(container, "1");
-			
+
 			CreateAccountPanel createPanel = (CreateAccountPanel) container.getComponent(2);
 			createPanel.setuserName("");
 			createPanel.setPassword("");
@@ -41,14 +41,14 @@ public class CreateAccountControl implements ActionListener
 		// The Submit button submits the login information to the server.
 		else if (command == "Submit")
 		{
-
+			System.out.println("Sending create");
 			// Get the username and password the user entered.
 			CreateAccountPanel createPanel = (CreateAccountPanel) container.getComponent(2);
 			CreateAccountData data = new CreateAccountData(createPanel.getUsername(), 
 					createPanel.getPassword(), createPanel.getVerifyPassword() );
-			
-			
-			
+
+
+
 			// Check the validity of the information locally first.
 			if (data.getUsername().equals("") || data.getPassword().equals("") 
 					||data.getVerifyPassword().equals(""))
@@ -58,7 +58,7 @@ public class CreateAccountControl implements ActionListener
 				displayError("You must enter a username/password and verify password.");
 				return;
 			}
-			
+
 			// Check the if password and verifying password is identical
 			else if (!data.getPassword().equals(data.getVerifyPassword()) )
 			{
@@ -73,16 +73,18 @@ public class CreateAccountControl implements ActionListener
 			}
 			else
 			{
+				System.out.println("right befoer send to server");
+
 				// Submit the login information to the server.
-//				System.out.println("right before sending data to server");
+				//				System.out.println("right before sending data to server");
 
 				try
 				{
 					displayError("Sent user/pass to server.");
-					
+
 					client.setCreateAccountControl(this);
 					client.sendToServer(data);
-					
+
 				} catch (IOException e)
 				{
 					e.printStackTrace();

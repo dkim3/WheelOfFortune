@@ -107,7 +107,9 @@ public class GuessLetterPanel extends JPanel {
 		textField_Price.setColumns(10);
 		textField_Price.setBounds(296, 305, 96, 64);
 		textField_Price.setEditable(false);
-		cc.setTextField_Price(textField_Price);
+		
+		GuessLetterData gld = new GuessLetterData();
+		textField_Price.setText("$" + gld.getPrizeMoney());
 		add(textField_Price);
 
 		Word_Panel = new JPanel();
