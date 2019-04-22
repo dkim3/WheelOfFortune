@@ -9,10 +9,13 @@ import java.awt.Color;
 
 public class ChooseCategoryPanel extends JPanel{
 	private JLabel lblNewLabel;
-//  private JButton btnAnimals;
-//  private JButton btnMovies;
-//  private JButton btnBrand;
-//  private JButton btnCountries;
+  private JButton btnAnimals;
+  private JButton btnMovies;
+  private JButton btnBrand;
+  private JButton btnCountries;
+  private JLabel lblSelectACategory;
+  
+  
 //  
 //	public JButton getBtnAnimals()
 //  {
@@ -75,43 +78,41 @@ public class ChooseCategoryPanel extends JPanel{
 
 
   public ChooseCategoryPanel(ChooseCategoryControl ccc) {
-	  
-
-	  
+	  	  
 		setLayout(null);
 		
 		JLabel label = new JLabel("");
 		label.setBounds(225, 5, 0, 0);
 		add(label);
 		
-		JLabel lblSelectACategory = new JLabel("Select A Category To Begin");
+		lblSelectACategory = new JLabel("Select A Category To Begin");
 		lblSelectACategory.setFont(new Font("Berlin Sans FB", Font.PLAIN, 20));
 		lblSelectACategory.setBounds(92, 16, 255, 29);
 		
 		add(lblSelectACategory);
 		
-		JButton btnAnimals = new JButton("Animals");
+		btnAnimals = new JButton("Animals");
 		btnAnimals.setFont(new Font("Berlin Sans FB", Font.PLAIN, 11));
 		btnAnimals.setBounds(164, 75, 89, 23);
 		btnAnimals.addActionListener(ccc);
 		ccc.setBtnAnimals(btnAnimals);
 		add(btnAnimals);
 		
-		JButton btnMovies = new  JButton("Movies"); 
+		btnMovies = new  JButton("Movies"); 
 		btnMovies.setFont(new Font("Berlin Sans FB", Font.PLAIN, 11));
 		btnMovies.setBounds(164, 123, 89, 23);
 		btnMovies.addActionListener(ccc);
 		ccc.setBtnMovies(btnMovies);
 		add(btnMovies);
 		
-		JButton btnBrand = new JButton("Brand");
+		btnBrand = new JButton("Brands");
 		btnBrand.setFont(new Font("Berlin Sans FB", Font.PLAIN, 11));
 		btnBrand.setBounds(164, 173, 89, 23);
 		btnBrand.addActionListener(ccc);
 		ccc.setBtnBrand(btnBrand);
 		add(btnBrand); 
 		
-		JButton btnCountries = new JButton("Countries");
+		btnCountries = new JButton("Countries");
 		btnCountries.setFont(new Font("Berlin Sans FB", Font.PLAIN, 11));
 		btnCountries.setBounds(164, 224, 89, 23); 
 		btnCountries.addActionListener(ccc);
@@ -126,7 +127,16 @@ public class ChooseCategoryPanel extends JPanel{
 		ccc.setwaitLabel(lblNewLabel);
 		add(lblNewLabel);
 		
+		
 	}
+  
+  public void choose() {
+    lblNewLabel.setText("");
+    btnAnimals.setVisible(true);
+    btnMovies.setVisible(true);
+    btnBrand.setVisible(true);
+    btnCountries.setVisible(true);
+  }
 	
 
 }

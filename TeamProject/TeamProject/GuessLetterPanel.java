@@ -165,7 +165,7 @@ public class GuessLetterPanel extends JPanel {
 		textFieldOponent.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		textFieldOponent.setColumns(10);
 		textFieldOponent.setBounds(164, 271, 73, 42);
-//		textFieldOponent.setEditable(false);
+		textFieldOponent.setEditable(false);
 		cc.setOpponent_Score(textFieldOponent);
 		add(textFieldOponent);
 

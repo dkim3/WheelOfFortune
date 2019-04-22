@@ -6,8 +6,7 @@ import java.awt.*;
 
 public class ResultPanel extends JPanel
 {
-  private JLabel TopLable;
-  private JLabel Winner;
+  private JLabel TopLabel;
   private JLabel Scores;
   private JLabel Player1;
   private JLabel Player1Score;
@@ -17,82 +16,64 @@ public class ResultPanel extends JPanel
   private JButton btnQuit;
   
   //Getter and Setters
-  public JLabel getWinner()
-  {
-    return Winner;
-  }
-
-  public void setWinner(JLabel winner)
-  {
-    Winner = winner;
-  }
-
-  public JLabel getPlayer1Score()
-  {
-    return Player1Score;
-  }
-
-  public void setPlayer1Score(JLabel player1Score)
-  {
-    Player1Score = player1Score;
-  }
-
-  public JLabel getPlayer2Score()
-  {
-    return Player2Score;
-  }
-
-  public void setPlayer2Score(JLabel player2Score)
-  {
-    Player2Score = player2Score;
-  }
-
-  
+  public void setPlayer1Score(String player1Score) {Player1Score.setText(player1Score);}
+  public void setPlayer2Score(String player2Score) {Player2Score.setText(player2Score);}
+ 
 	public ResultPanel(ResultControl rc) {
 		setLayout(null);
-		
-		TopLable = new JLabel("TBD");
-		TopLable.setForeground(Color.RED);
-		TopLable.setFont(new Font("Berlin Sans FB", Font.PLAIN, 20));
-		TopLable.setBounds(130, 11, 90, 27);
-		add(TopLable);
+		TopLabel = new JLabel("TBD", JLabel.CENTER);
+		TopLabel.setForeground(Color.RED);
+		TopLabel.setFont(new Font("Berlin Sans FB", Font.PLAIN, 32));
+		TopLabel.setBounds(77, 40, 289, 27);
+		rc.setTopLabel(TopLabel);
+		add(TopLabel);
 		
 //		Winner = new JLabel("TBD");
 //		Winner.setFont(new Font("Berlin Sans FB", Font.PLAIN, 15));
 //		Winner.setBounds(230, 18, 46, 14);
 //		add(Winner);
 		
-		Scores = new JLabel("Scores");
+		Scores = new JLabel("Scores", JLabel.CENTER);
+		Scores.setForeground(Color.BLUE);
 		Scores.setFont(new Font("Berlin Sans FB", Font.PLAIN, 20));
-		Scores.setBounds(184, 82, 78, 14);
+		Scores.setBounds(142, 93, 158, 27);
 		add(Scores);
 		
-		Player1 = new JLabel("Player 1");
-		Player1.setFont(new Font("Berlin Sans FB", Font.PLAIN, 14));
-		Player1.setBounds(155, 159, 46, 14);
+		Player1 = new JLabel("Your Score :");
+		Player1.setFont(new Font("Berlin Sans FB", Font.PLAIN, 25));
+		Player1.setBounds(88, 154, 152, 27);
 		add(Player1);
 		
-		Player1Score = new JLabel("TBD");
-		Player1Score.setFont(new Font("Berlin Sans FB", Font.PLAIN, 12));
-		Player1Score.setBounds(230, 160, 46, 14);
+		Player1Score = new JLabel("TBD1");
+		Player1Score.setFont(new Font("Berlin Sans FB", Font.PLAIN, 21));
+		Player1Score.setBounds(250, 160, 106, 23);
+    rc.setPlayer1Score(Player1Score);
 		add(Player1Score);
 		
-		Player2 = new JLabel("Player 2");
-		Player2.setFont(new Font("Berlin Sans FB", Font.PLAIN, 14));
-		Player2.setBounds(155, 212, 65, 14);
+		Player2 = new JLabel("Opponent Score :");
+		Player2.setFont(new Font("Berlin Sans FB", Font.PLAIN, 25));
+		Player2.setBounds(34, 207, 206, 27);
 		add(Player2);
 		
-		Player2Score = new JLabel("TBD");
-		Player2Score.setFont(new Font("Berlin Sans FB", Font.PLAIN, 12));
-		Player2Score.setBounds(230, 213, 46, 14);
+		Player2Score = new JLabel("TBD2");
+		Player2Score.setFont(new Font("Berlin Sans FB", Font.PLAIN, 21));
+		Player2Score.setBounds(250, 215, 106, 19);
+    rc.setPlayer2Score(Player2Score);
 		add(Player2Score);
 		
 		btnPlayAgain = new JButton("Play Again");
-		btnPlayAgain.setBounds(67, 311, 105, 23);
+		btnPlayAgain.setBounds(67, 295, 117, 39);
+		btnPlayAgain.addActionListener(rc);
 		add(btnPlayAgain);
 		
+		
 		btnQuit = new JButton("Exit");
-		btnQuit.setBounds(251, 311, 105, 23);
+		btnQuit.setBounds(261, 295, 105, 39);
+		btnQuit.addActionListener(rc);
 		add(btnQuit);
+		
+		JSeparator separator = new JSeparator();
+		separator.setBounds(123, 192, 177, 2);
+		add(separator);
 	}
 }

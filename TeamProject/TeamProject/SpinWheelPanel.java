@@ -106,6 +106,7 @@ public class SpinWheelPanel extends JPanel {
 		txtScoreToBe = new JTextField();
 		txtScoreToBe.setText("Your Score");
 		txtScoreToBe.setBounds(140, 287, 116, 20);
+		txtScoreToBe.setEditable(false);
 		swc.setTxtScoreToBe(txtScoreToBe);
 		add(txtScoreToBe);
 		txtScoreToBe.setColumns(10);

@@ -14,6 +14,7 @@ public class PlayerClient extends AbstractClient
 	private SpinWheelControl spinWheelControl;
 	private ChooseCategoryControl chooseCategoryControl;
 	private ResultControl resultControl;
+	private GuessData tempGuessData;
 	
 	private SwitchPlayer players;
 
@@ -21,6 +22,7 @@ public class PlayerClient extends AbstractClient
 	//Constructor
 	public PlayerClient() {
 		super("localhost",8300);
+		tempGuessData = new GuessData();
 	}
 	public PlayerClient(String host, int port) {
 		super(host,port);
@@ -115,13 +117,16 @@ public class PlayerClient extends AbstractClient
 		else if(arg0 instanceof CategoryData) {
 			System.out.println("got a categoryData from server");
 			CategoryData tempcategory = (CategoryData) arg0;
+			
 			GuessData tempGuessData = new GuessData();
+			
 			tempGuessData.setWordToGuess(tempcategory.getWord());      
 
 			spinWheelControl.setGld(tempGuessData);
 			spinWheelControl.startSpin();
 			
 			guessLetterControl.updateDisplay(tempGuessData);
+			guessLetterControl.setData(tempGuessData);
 			guessLetterControl.myTurn();
 			
 		}
@@ -130,7 +135,11 @@ public class PlayerClient extends AbstractClient
 		{ 			
 			System.out.println("got a GuessData from server");
 
-			GuessData tempGuessData = (GuessData) arg0;
+			tempGuessData = (GuessData) arg0;
+			
+			int tempscore = tempGuessData.getScore();
+			tempGuessData.setScore(tempGuessData.getScore_2());
+			tempGuessData.setScore_2(tempscore);
 			
 			int a = tempGuessData.getLetterLeft();
 			
@@ -138,8 +147,10 @@ public class PlayerClient extends AbstractClient
 			{
 				resultControl.loser(tempGuessData);
 			}
-			//when player receive GuessData which mean he get it wrong
-			guessLetterControl.waitScreen();
+			else {
+	      //when player receive GuessData which mean he get it wrong
+	      guessLetterControl.waitScreen();
+			}
 			guessLetterControl.updateDisplay(tempGuessData); 
 		}
 
@@ -147,7 +158,14 @@ public class PlayerClient extends AbstractClient
 		else if (arg0 instanceof SwitchPlayer)
 		{
 			SwitchPlayer tempSwitch = (SwitchPlayer) arg0;
+			GuessData tempGuessData = tempSwitch.getGuessData();
+			
+			spinWheelControl.setGld(tempGuessData);
+			guessLetterControl.updateDisplay(tempGuessData);
+			
+			guessLetterControl.myTurn();
 			spinWheelControl.startSpin();
+			
 
 		}
 

@@ -157,9 +157,10 @@ public class SpinWheelControl implements ActionListener {
 		}
 		else if(command.equals("Start the Game")) // start game button pressed
 		{
-			txtScoreToBe.setText("");
 			GuessLetterPanel guessPanel = (GuessLetterPanel) container.getComponent(5);
 			guessPanel.setTextField_Price(scores[x]);
+			txtScoreToBe.setText("");
+			
 
 			CardLayout cardLayout = (CardLayout) container.getLayout(); // send user to guess letter panel
 			cardLayout.show(container, "6");
