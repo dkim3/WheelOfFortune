@@ -81,7 +81,7 @@ public class PlayerGUI extends JFrame
 		this.add(container, BorderLayout.CENTER);
 
 		// Show the JFrame.
-		this.setSize(550, 400);
+		this.setSize(550, 500);
 		this.setVisible(true);
 	}
 

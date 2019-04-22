@@ -118,7 +118,7 @@ public class PlayerClient extends AbstractClient
 			spinWheelControl.startSpin();
 
 			GuessData tempGuessData = new GuessData();
-			tempGuessData.setwordToGuess(tempcategory.getWord());      
+			tempGuessData.setWordToGuess(tempcategory.getWord());      
 			guessLetterControl.setGuessedLetterData(tempGuessData);
 			
 		}
@@ -128,7 +128,10 @@ public class PlayerClient extends AbstractClient
 			System.out.println("got a GuessData from server");
 
 			GuessData tempGuessData = (GuessData) arg0;
-			if (tempGuessData.getLetterLeft() == 0)
+			
+			int a = tempGuessData.getLetterLeft();
+			
+			if (a == 0)
 			{
 				resultControl.loser(tempGuessData);
 			}

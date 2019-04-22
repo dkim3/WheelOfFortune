@@ -150,7 +150,7 @@ public class GameServer extends AbstractServer
 				{	e1.printStackTrace(); }
 
 				GuessData tempGuessData =  new GuessData();
-				tempGuessData.setwordToGuess(wordToGuess);
+				tempGuessData.setWordToGuess(wordToGuess);
 				
 				GuessData tempswitchPlayer =  new GuessData();
 //				GuessData.setWordToGuess(wordToGuess);
@@ -187,18 +187,6 @@ public class GameServer extends AbstractServer
 		else if (arg0 instanceof GuessData)
 		{
 			GuessData tempGuessData = (GuessData) arg0;
-			// send the same Data to all clients connected
-			
-			
-			SwitchPlayer tempswitchPlayer =  new SwitchPlayer();
-//			GuessData.setWordToGuess(wordToGuess);
-			tempswitchPlayer.setWordToGuess(tempGuessData.getWordToGuess());
-			tempswitchPlayer.setChosenLetter(tempGuessData.getChosenLetter());
-			tempswitchPlayer.setLetterLeft(tempGuessData.getLetterLeft());
-			tempswitchPlayer.setPrizeMoney(tempGuessData.getPrizeMoney());
-			tempswitchPlayer.setScore(tempGuessData.getScore());
-			tempswitchPlayer.setScore_2(tempGuessData.getScore());
-
 			
 			int clientlistsize = clientThreadList.length;
 
@@ -209,14 +197,12 @@ public class GameServer extends AbstractServer
 				{
 					if (!c.equals(arg1))
 					{
-				        c.sendToClient(tempswitchPlayer);
+				        c.sendToClient(tempGuessData);
 					}
 				} catch (IOException e)
 				{e.printStackTrace();	}
 			}
-			
-			
-			
+					
 		} else if (arg0 instanceof SwitchPlayer)
 		{
 			System.out.println("going to send switch player to client");

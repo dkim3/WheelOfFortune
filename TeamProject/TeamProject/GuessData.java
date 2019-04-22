@@ -33,10 +33,8 @@ public class GuessData implements Serializable {
 	{
 		return wordToGuess;
 	}
-	public void setWordToGuess(String wordToGuess)
-	{
-		this.wordToGuess = wordToGuess;
-	}
+
+
 	public ArrayList<Character> getChosenLetter()
 	{
 		return chosenLetter;
@@ -65,7 +63,7 @@ public class GuessData implements Serializable {
 		this.prizeMoney = prizeMoney;
 	}
 
-	public void setwordToGuess(String wordToGuess) {
+	public void setWordToGuess(String wordToGuess) {
 		this.wordToGuess = wordToGuess;
 		this.letterLeft = (int) wordToGuess.chars().distinct().count();
 

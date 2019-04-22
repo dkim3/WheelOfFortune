@@ -232,14 +232,13 @@ public class GuessLetterControl implements ActionListener {
 						else
 						{
 							lblError.setText("Too bad you are wrong");
-
+							lblError.setVisible(true);
 							GuessedLetter.setText("");
 							updateDisplay(data);
 							waitScreen();
 
 							try {
 								SwitchPlayer tempswitchPlayer = new SwitchPlayer();
-								
 //								tempswitchPlayer.setLettersSoFar(data.getchosenLetter());
 								System.out.println("going to send switch plaer from client to server");
 								client.sendToServer(tempswitchPlayer);
@@ -278,13 +277,12 @@ public class GuessLetterControl implements ActionListener {
 		lblLettersSoFar.setVisible(true);
 
 
-
 	}
 
 	public void waitScreen() {
 
 		CardLayout cardLayout = (CardLayout) container.getLayout(); // send user to guess letter panel
-		cardLayout.show(container, "6");
+		cardLayout.show(container, "6");//6 = guess letter panel
 
 		guessButton.setVisible(false);
 		GuessedLetter.setEditable(false);
