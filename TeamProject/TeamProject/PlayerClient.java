@@ -10,11 +10,13 @@ public class PlayerClient extends AbstractClient
 
 	private LoginControl loginControl;
 	private CreateAccountControl createAccountControl;
-
 	private GuessLetterControl guessLetterControl;
 	private SpinWheelControl spinWheelControl;
 	private ChooseCategoryControl chooseCategoryControl;
 	private ResultControl resultControl;
+	
+	private SwitchPlayer players;
+
 
 	//Constructor
 	public PlayerClient() {

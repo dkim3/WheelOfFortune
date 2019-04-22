@@ -32,6 +32,7 @@ public class GameServer extends AbstractServer
 	private ArrayList<ConnectionToClient> clientList;
 //	private ArrayList<ServerSocket> socketList;
 
+	private SwitchPlayer players;
 //	private ServerSocket listener;
 
 
@@ -62,7 +63,6 @@ public class GameServer extends AbstractServer
 	{
 		System.out.println("inside server" + arg0.toString());
 	    Thread[] clientThreadList = getClientConnections();
-	    
 		// CREATE ACCOUNT
 		if (arg0 instanceof LoginData)
 		{
@@ -163,7 +163,7 @@ public class GameServer extends AbstractServer
 //					ConnectionToClient tempclient = new ConnectionToClient(clientList.get(i).getThreadGroup(),clientList.get(i).);
 //					tempclient = clientList.get(i);
 					ConnectionToClient tempclient = clientList.get(i);
-					ConnectionToClient tempclient_2 = null ;
+	
 
 					try
 					{
@@ -188,19 +188,41 @@ public class GameServer extends AbstractServer
 		{
 			GuessLetterData tempGuessData = (GuessLetterData) arg0;
 			// send the same Data to all clients connected
-			for (ConnectionToClient client : clientList)
+			
+			
+			SwitchPlayer tempswitchPlayer =  new SwitchPlayer();
+//			guessLetterData.setWordToGuess(wordToGuess);
+			tempswitchPlayer.setWordToGuess(tempGuessData.getWordToGuess());
+			
+			int clientlistsize = clientList.size();
+
+			for(int i = clientlistsize-2; i< clientlistsize; i++)
 			{
-				if (!client.equals(arg1))
+//				ConnectionToClient tempclient = new ConnectionToClient(clientList.get(i).getThreadGroup(),clientList.get(i).);
+//				tempclient = clientList.get(i);
+				ConnectionToClient tempclient = clientList.get(i);
+				ConnectionToClient tempclient_2 = null ;
+
+				try
 				{
-					try
+					if (tempclient.equals(arg1))
 					{
-						client.sendToClient(tempGuessData);
-					} catch (IOException e)
-					{
-						e.printStackTrace();
+						//for some reason the socket disappear if send guessData to client
+						tempclient.sendToClient(serverCategoryData);
 					}
-				}
+					else {
+						Thread c = new Thread (clientThreadList[i]);
+						
+				        ((ConnectionToClient)clientThreadList[i]).sendToClient(tempswitchPlayer);
+
+
+					}
+				} catch (IOException e)
+				{e.printStackTrace();	}
 			}
+			
+			
+			
 		} else if (arg0 instanceof SwitchPlayer)
 		{
 			System.out.println("going to send switch player to client");

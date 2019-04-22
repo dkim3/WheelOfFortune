@@ -7,7 +7,9 @@ import java.util.ArrayList;
 public class SwitchPlayer implements Serializable {
 	private Integer prizeMoney;
 	private String wordToGuess;
+	
 	private ArrayList<Character> chosenLetter;
+
 	private Integer score;
 	private Integer score_2;
 	private Integer letterLeft;
@@ -15,7 +17,6 @@ public class SwitchPlayer implements Serializable {
 	
 	private PlayerClient currentPlayer;
 	private PlayerClient nextPlayer;
-	private ArrayList<Character> lettersSoFar;
 
 	
 
@@ -99,7 +100,6 @@ public class SwitchPlayer implements Serializable {
 
 
 	public SwitchPlayer(PlayerClient currentPlayer, PlayerClient nextPlayer) {
-		lettersSoFar = new ArrayList<Character>();
 		this.currentPlayer = currentPlayer;
 		this.nextPlayer = nextPlayer;
 	}
@@ -120,11 +120,5 @@ public class SwitchPlayer implements Serializable {
 		this.nextPlayer = nextPlayer;
 	}
 	
-	public ArrayList<Character> getLettersSoFar() {
-		return lettersSoFar;
-	}
 
-	public void setLettersSoFar(ArrayList<Character> lettersSoFar) {
-		this.lettersSoFar = lettersSoFar;
-	}
 }
