@@ -88,6 +88,8 @@ public class SpinWheelControl implements ActionListener {
 	// Private data fields for the container and chat client.
 	private JPanel container;
 	private PlayerClient client;
+	private GuessData gld ;
+
 
 	private JTextField txtScoreToBe = new JTextField();
 	private JButton btnStopTheWheel = new JButton();
@@ -101,8 +103,19 @@ public class SpinWheelControl implements ActionListener {
 	// Constructor for the login controller.
 	public SpinWheelControl(JPanel container, PlayerClient client)
 	{
+		gld= new GuessData();
 		this.container = container;
 		this.client = client;
+	}
+
+
+	public GuessData getGld() {
+		return gld;
+	}
+
+
+	public void setGld(GuessData gld) {
+		this.gld = gld;
 	}
 
 
@@ -134,7 +147,6 @@ public class SpinWheelControl implements ActionListener {
 			txtScoreToBe.setText("$" + scores[x]);  // determining the random score that player will get
 
 
-			GuessData gld = new GuessData();
 			gld.setPrizeMoney(scores[x]);
 
 			try {

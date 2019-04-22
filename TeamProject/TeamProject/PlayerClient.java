@@ -115,10 +115,12 @@ public class PlayerClient extends AbstractClient
 		else if(arg0 instanceof CategoryData) {
 			System.out.println("got a categoryData from server");
 			CategoryData tempcategory = (CategoryData) arg0;
-			spinWheelControl.startSpin();
-
 			GuessData tempGuessData = new GuessData();
 			tempGuessData.setWordToGuess(tempcategory.getWord());      
+
+			spinWheelControl.setGld(tempGuessData);
+			spinWheelControl.startSpin();
+
 			guessLetterControl.setGuessedLetterData(tempGuessData);
 			
 		}

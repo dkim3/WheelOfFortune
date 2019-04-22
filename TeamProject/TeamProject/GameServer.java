@@ -173,9 +173,10 @@ public class GameServer extends AbstractServer
 							tempclient.sendToClient(serverCategoryData);
 						}
 						else {
-							Thread c = new Thread (clientThreadList[i]);
-							
-					        ((ConnectionToClient)clientThreadList[i]).sendToClient(tempswitchPlayer);
+//							Thread c = new Thread (clientThreadList[i]);
+							tempclient.sendToClient(tempswitchPlayer);
+
+//					        ((ConnectionToClient)clientThreadList[i]).sendToClient(tempswitchPlayer);
 
 
 						}
