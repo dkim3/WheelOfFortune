@@ -107,29 +107,6 @@ public class GuessLetterControl implements ActionListener {
 		this.lblError = errLbl;
 	}
 
-	public void setWord(GuessData Data) {
-
-		ArrayList<Character> letters = Data.getchosenLetter();
-		String answer = Data.getwordToGuess();
-
-		String displayAnswer = "";
-
-
-		
-		for(int i = 0; i< answer.length();i++)
-		{
-			char a = answer.charAt(i);
-			if(letters.contains(a))
-				displayAnswer  = displayAnswer + a;
-			else
-				displayAnswer= displayAnswer + " _ ";
-		}
-
-
-		this.wordToDisplay = displayAnswer;
-
-	}
-
 	public String getWord() {
 		return wordToDisplay;
 	}
@@ -256,6 +233,29 @@ public class GuessLetterControl implements ActionListener {
 
 	}
 
+	public void setWord(GuessData Data) {
+
+		ArrayList<Character> letters = Data.getchosenLetter();
+		String answer = Data.getwordToGuess();
+
+		String displayAnswer = "";
+
+
+		
+		for(int i = 0; i< answer.length();i++)
+		{
+			char a = answer.charAt(i);
+			if(letters.contains(a))
+				displayAnswer  = displayAnswer + a;
+			else
+				displayAnswer= displayAnswer + " _ ";
+		}
+
+
+		this.wordToDisplay = displayAnswer;
+
+	}
+	
 	//
 	public void updateDisplay(GuessData Data) {
 
@@ -288,6 +288,15 @@ public class GuessLetterControl implements ActionListener {
 		GuessedLetter.setEditable(false);
 		
 		turnLabel.setText("Opponent Turn");
+	}
+	
+	public void myTurn() {
+
+
+		guessButton.setVisible(true);
+		GuessedLetter.setEditable(true);
+		
+		turnLabel.setText("Your Turn");
 	}
 
 }

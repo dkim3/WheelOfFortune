@@ -120,8 +120,9 @@ public class PlayerClient extends AbstractClient
 
 			spinWheelControl.setGld(tempGuessData);
 			spinWheelControl.startSpin();
-
-			guessLetterControl.setGuessedLetterData(tempGuessData);
+			
+			guessLetterControl.updateDisplay(tempGuessData);
+			guessLetterControl.myTurn();
 			
 		}
 		//"WORD DATA" FROM SERVER
@@ -139,7 +140,6 @@ public class PlayerClient extends AbstractClient
 			}
 			//when player receive GuessData which mean he get it wrong
 			guessLetterControl.waitScreen();
-
 			guessLetterControl.updateDisplay(tempGuessData); 
 		}
 
