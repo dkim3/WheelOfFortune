@@ -12,7 +12,7 @@ import javax.swing.SwingConstants;
 
 public class GuessLetterPanel extends JPanel {
 	private JTextField GuessTxtField;
-	private JTextField textField_Score;
+	private JTextField txtAchi;
 	private JTextField textField_Price;
 	private JTextField textFieldOponent;
 
@@ -34,6 +34,7 @@ public class GuessLetterPanel extends JPanel {
 
 	public JTextField getGuessTxtField() {
 		return GuessTxtField;
+
 	}
 
 	public void setGuessTxtField(String guessText) {
@@ -41,11 +42,11 @@ public class GuessLetterPanel extends JPanel {
 	}
 
 	public JTextField getTextField_Score() {
-		return textField_Score;
+		return txtAchi;
 	}
 
 	public void setTextField_Score(String text) {
-		this.textField_Score.setText(text);
+		this.txtAchi.setText(text);
 	}
 
 	public JTextField getTextField_Price() {
@@ -58,119 +59,130 @@ public class GuessLetterPanel extends JPanel {
 
 	public GuessLetterPanel(GuessLetterControl cc) {
 		setLayout(null);
+		this.setBounds(400, 600, 457, 418);
 
-		JLabel lblGuessALetter = new JLabel("Guess a Letter:-");
+		JLabel lblGuessALetter = new JLabel("Guess a Letter below:");
 		lblGuessALetter.setForeground(Color.BLACK);
-		lblGuessALetter.setFont(new Font("Tarzan", Font.PLAIN, 16));
-		lblGuessALetter.setBounds(139, 10, 139, 26);
+		lblGuessALetter.setFont(new Font("Berlin Sans FB", Font.PLAIN, 22));
+		lblGuessALetter.setBounds(42, 25, 219, 26);
 		add(lblGuessALetter);
 
 		GuessTxtField = new JTextField();
+		GuessTxtField.setHorizontalAlignment(SwingConstants.CENTER);
 		GuessTxtField.setFont(new Font("Tahoma", Font.PLAIN, 29));
-		GuessTxtField.setBounds(104, 125, 71, 64);
+		GuessTxtField.setBounds(87, 93, 96, 41);
 		add(GuessTxtField);
 		GuessTxtField.setColumns(10);
 		cc.setJTextField(GuessTxtField);
 
 		btnGuess = new JButton("Guess");
 		btnGuess.setFont(new Font("Sylfaen", Font.PLAIN, 16));
-		btnGuess.setBounds(207, 125, 85, 64);
+		btnGuess.setBounds(207, 108, 96, 26);
 		cc.setGuessButton(btnGuess);
 		add(btnGuess);
 		btnGuess.addActionListener(cc);
 
-		JLabel lblScore = new JLabel("Score:-");
+		JLabel lblScore = new JLabel("Your Score: ");
 		lblScore.setHorizontalAlignment(SwingConstants.CENTER);
-		lblScore.setForeground(Color.RED);
+		lblScore.setForeground(Color.BLACK);
 		lblScore.setFont(new Font("Tarzan", Font.PLAIN, 17));
-		lblScore.setBounds(21, 269, 96, 26);
+		lblScore.setBounds(22, 235, 96, 26);
 		add(lblScore);
 
-		JLabel lblPrice = new JLabel("Price:-");
-		lblPrice.setForeground(Color.RED);
+		JLabel lblPrice = new JLabel("Prize:-");
+		lblPrice.setForeground(Color.BLACK);
 		lblPrice.setFont(new Font("Tarzan", Font.PLAIN, 17));
-		lblPrice.setBounds(296, 269, 62, 26);
+		lblPrice.setBounds(304, 235, 62, 26);
 		add(lblPrice);
 
-		textField_Score = new JTextField();
-		textField_Score.setForeground(Color.BLACK);
-		textField_Score.setFont(new Font("Tahoma", Font.PLAIN, 29));
-		textField_Score.setBounds(21, 305, 96, 64);
-		textField_Score.setEditable(false);
-		cc.setTextField_Score(textField_Score);
-		add(textField_Score);
-		textField_Score.setColumns(10);
+		txtAchi = new JTextField();
+		txtAchi.setHorizontalAlignment(SwingConstants.CENTER);
+		txtAchi.setForeground(Color.BLACK);
+		txtAchi.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		txtAchi.setBounds(22, 272, 73, 41);
+		txtAchi.setEditable(false);
+		cc.setTextField_Score(txtAchi);
+		add(txtAchi);
+		txtAchi.setColumns(10);
 
 		textField_Price = new JTextField();
+		textField_Price.setText("");
+		textField_Price.setHorizontalAlignment(SwingConstants.CENTER);
 		textField_Price.setForeground(Color.BLACK);
-		textField_Price.setFont(new Font("Tahoma", Font.PLAIN, 26));
+		textField_Price.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		textField_Price.setColumns(10);
-		textField_Price.setBounds(296, 305, 96, 64);
+		textField_Price.setBounds(304, 272, 73, 42);
+		textField_Price.setEditable(false);
 		cc.setTextField_Price(textField_Price);
 		add(textField_Price);
 
 		Word_Panel = new JPanel();
-		Word_Panel.setBackground(Color.GRAY);
-		Word_Panel.setBounds(27, 208, 353, 54);
+		Word_Panel.setBackground(Color.LIGHT_GRAY);
+		Word_Panel.setBounds(28, 157, 353, 54);
 		add(Word_Panel);
 		Word_Panel.setLayout(new BorderLayout());
 
+		guessinglbl = new JLabel("Word with correct letters");
+		guessinglbl.setHorizontalAlignment(SwingConstants.CENTER);
+		Word_Panel.add(guessinglbl, BorderLayout.CENTER);
+		guessinglbl.setForeground(Color.WHITE);
+		guessinglbl.setFont(new Font("Tahoma", Font.BOLD, 20));
+		cc.setGuessinglbl(guessinglbl);
+
 		JLabel lblChoosenLettes = new JLabel("Choosen Lettes:-");
-		lblChoosenLettes.setFont(new Font("Tarzan", Font.PLAIN, 13));
+		lblChoosenLettes.setFont(new Font("Berlin Sans FB", Font.PLAIN, 18));
 		lblChoosenLettes.setForeground(Color.RED);
-		lblChoosenLettes.setBounds(21, 379, 126, 26);
+		lblChoosenLettes.setBounds(139, 328, 126, 26);
 		add(lblChoosenLettes);
 
 		lblLettersSoFar = new JLabel("letters");
 		lblLettersSoFar.setForeground(new Color(0, 0, 0));
 		lblLettersSoFar.setFont(new Font("Roland", Font.PLAIN, 18));
-		lblLettersSoFar.setBounds(31, 407, 361, 33);
+		lblLettersSoFar.setBounds(22, 365, 361, 33);
 		cc.setlblLettersSoFar(lblLettersSoFar);
 		add(lblLettersSoFar);
 
-		guessinglbl = new JLabel("Word with correct letters");
-		guessinglbl.setForeground(Color.WHITE);
-		guessinglbl.setFont(new Font("Tahoma", Font.BOLD, 36));
-		cc.setGuessinglbl(guessinglbl);
-		Word_Panel.add(guessinglbl, BorderLayout.CENTER);
-
-		lblError = new JLabel();
+		lblError = new JLabel("Error Messages");
 		lblError.setHorizontalAlignment(SwingConstants.CENTER);
 		lblError.setForeground(Color.RED);
-		lblError.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		lblError.setBounds(30, 47, 328, 33);
-//		lblError.setVisible(false);
+		lblError.setFont(new Font("Berlin Sans FB", Font.PLAIN, 14));
+		lblError.setBounds(42, 49, 328, 33);
+		lblError.setVisible(false);
 		cc.setlblError(lblError);
 		add(lblError);
 
-		JLabel lblOponentScore = new JLabel("Oponent Score:-");
+		JLabel lblOponentScore = new JLabel("Oponent's Score:-");
 		lblOponentScore.setHorizontalAlignment(SwingConstants.CENTER);
-		lblOponentScore.setForeground(Color.RED);
+		lblOponentScore.setForeground(Color.BLACK);
 		lblOponentScore.setFont(new Font("Tarzan", Font.PLAIN, 15));
-		lblOponentScore.setBounds(127, 270, 143, 26);
+		lblOponentScore.setBounds(139, 235, 143, 26);
 		add(lblOponentScore);
 
 		textFieldOponent = new JTextField();
+		textFieldOponent.setHorizontalAlignment(SwingConstants.CENTER);
+		textFieldOponent.setText("");
 		textFieldOponent.setForeground(Color.BLACK);
-		textFieldOponent.setFont(new Font("Tahoma", Font.PLAIN, 29));
+		textFieldOponent.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		textFieldOponent.setColumns(10);
-		textFieldOponent.setBounds(137, 305, 96, 64);
+		textFieldOponent.setBounds(164, 271, 73, 42);
+//		textFieldOponent.setEditable(false);
 		cc.setOpponent_Score(textFieldOponent);
 		add(textFieldOponent);
 
-		turnLabel = new JLabel("Who's turn?");
+		turnLabel = new JLabel("Who's turn?\r\n");
 		turnLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		turnLabel.setForeground(Color.RED);
+		turnLabel.setForeground(Color.BLUE);
 		turnLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		turnLabel.setBounds(56, 80, 296, 35);
+		turnLabel.setBounds(231, 23, 219, 35);
+//		turnLabel.setVisible(false);
 		cc.setTurnLabel(turnLabel);
 		add(turnLabel);
 
-		JLabel label = new JLabel("'money$ ");
+		JLabel label = new JLabel("$");
 		label.setHorizontalAlignment(SwingConstants.CENTER);
-		label.setFont(new Font("Tahoma", Font.PLAIN, 34));
+		label.setFont(new Font("Tahoma", Font.PLAIN, 20));
 		label.setForeground(Color.BLACK);
-		label.setBounds(274, 302, 18, 67);
+		label.setBounds(208, 263, 169, 54);
 		add(label);
 	}
 }
