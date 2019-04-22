@@ -12,7 +12,7 @@ public class GuessLetterControl implements ActionListener {
 	// Private Data Fields
 	private JPanel container;
 	private PlayerClient client;
-	private GuessLetterData data;
+	private GuessData data;
 
 	private SwitchPlayer switchPlayer;
 	private ArrayList<Character> wordToDisplay;
@@ -35,11 +35,11 @@ public class GuessLetterControl implements ActionListener {
 	private JButton guessButton;
 
 	// setters and getters
-	public GuessLetterData getData() {
+	public GuessData getData() {
 		return data;
 	}
 
-	public void setData(GuessLetterData data) {
+	public void setData(GuessData data) {
 		this.data = data;
 	}
 
@@ -107,7 +107,7 @@ public class GuessLetterControl implements ActionListener {
 		this.lblError = errLbl;
 	}
 
-	public void setWord(GuessLetterData Data) {
+	public void setWord(GuessData Data) {
 
 		ArrayList<Character> letters = Data.getchosenLetter();
 		String answer = Data.getwordToGuess();
@@ -135,7 +135,7 @@ public class GuessLetterControl implements ActionListener {
 		return wordToDisplay;
 	}
 
-	public void setGuessedLetterData(GuessLetterData Data) {
+	public void setGuessedLetterData(GuessData Data) {
 		this.data = Data;
 	}
 
@@ -259,7 +259,7 @@ public class GuessLetterControl implements ActionListener {
 	}
 
 	//
-	public void updateDisplay(GuessLetterData Data) {
+	public void updateDisplay(GuessData Data) {
 
 		setWord(Data);
 

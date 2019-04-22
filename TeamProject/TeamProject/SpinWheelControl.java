@@ -134,7 +134,7 @@ public class SpinWheelControl implements ActionListener {
 			txtScoreToBe.setText("$" + scores[x]);  // determining the random score that player will get
 
 
-			GuessLetterData gld = new GuessLetterData();
+			GuessData gld = new GuessData();
 			gld.setPrizeMoney(scores[x]);
 
 			try {

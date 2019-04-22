@@ -25,7 +25,7 @@ public class GameServer extends AbstractServer
 	private Database database;
 	private ArrayList<String> category;
 	private CategoryData serverCategoryData;
-	private GuessLetterData guessLetterData;
+	private GuessData GuessData;
 	private SwitchPlayer SwitchPlayer;
 	private Integer numCategory = 0;
 	
@@ -149,11 +149,11 @@ public class GameServer extends AbstractServer
 				} catch (SQLException e1)
 				{	e1.printStackTrace(); }
 
-				GuessLetterData tempGuessData =  new GuessLetterData();
+				GuessData tempGuessData =  new GuessData();
 				tempGuessData.setwordToGuess(wordToGuess);
 				
-				SwitchPlayer tempswitchPlayer =  new SwitchPlayer();
-//				guessLetterData.setWordToGuess(wordToGuess);
+				GuessData tempswitchPlayer =  new GuessData();
+//				GuessData.setWordToGuess(wordToGuess);
 				tempswitchPlayer.setWordToGuess(wordToGuess);
 //				TempData tempData =  new TempData();
 
@@ -184,38 +184,32 @@ public class GameServer extends AbstractServer
 				}
 			}
 		}
-		else if (arg0 instanceof GuessLetterData)
+		else if (arg0 instanceof GuessData)
 		{
-			GuessLetterData tempGuessData = (GuessLetterData) arg0;
+			GuessData tempGuessData = (GuessData) arg0;
 			// send the same Data to all clients connected
 			
 			
 			SwitchPlayer tempswitchPlayer =  new SwitchPlayer();
-//			guessLetterData.setWordToGuess(wordToGuess);
+//			GuessData.setWordToGuess(wordToGuess);
 			tempswitchPlayer.setWordToGuess(tempGuessData.getWordToGuess());
+			tempswitchPlayer.setChosenLetter(tempGuessData.getChosenLetter());
+			tempswitchPlayer.setLetterLeft(tempGuessData.getLetterLeft());
+			tempswitchPlayer.setPrizeMoney(tempGuessData.getPrizeMoney());
+			tempswitchPlayer.setScore(tempGuessData.getScore());
+			tempswitchPlayer.setScore_2(tempGuessData.getScore());
+
 			
-			int clientlistsize = clientList.size();
+			int clientlistsize = clientThreadList.length;
 
 			for(int i = clientlistsize-2; i< clientlistsize; i++)
 			{
-//				ConnectionToClient tempclient = new ConnectionToClient(clientList.get(i).getThreadGroup(),clientList.get(i).);
-//				tempclient = clientList.get(i);
-				ConnectionToClient tempclient = clientList.get(i);
-				ConnectionToClient tempclient_2 = null ;
-
+				ConnectionToClient c = ((ConnectionToClient)clientThreadList[i]);
 				try
 				{
-					if (tempclient.equals(arg1))
+					if (!c.equals(arg1))
 					{
-						//for some reason the socket disappear if send guessData to client
-						tempclient.sendToClient(serverCategoryData);
-					}
-					else {
-						Thread c = new Thread (clientThreadList[i]);
-						
-				        ((ConnectionToClient)clientThreadList[i]).sendToClient(tempswitchPlayer);
-
-
+				        c.sendToClient(tempswitchPlayer);
 					}
 				} catch (IOException e)
 				{e.printStackTrace();	}
@@ -338,12 +332,12 @@ public class GameServer extends AbstractServer
 		this.serverCategoryData = serverCategoryData;
 	}
 
-	public GuessLetterData getGuessLetterData() {
-		return guessLetterData;
+	public GuessData getGuessData() {
+		return GuessData;
 	}
 
-	public void setGuessLetterData(GuessLetterData guessLetterData) {
-		this.guessLetterData = guessLetterData;
+	public void setGuessData(GuessData GuessData) {
+		this.GuessData = GuessData;
 	}
 
 	public SwitchPlayer getSwitchPlayer() {

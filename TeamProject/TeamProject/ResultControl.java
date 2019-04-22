@@ -42,13 +42,13 @@ public class ResultControl {
 	    }
 	  }
 	  
-	  public void winner(GuessLetterData gld) {
+	  public void winner(GuessData gld) {
 	   Player1Score.setText(Integer.toString(gld.getScore())); 
 	   Player2Score.setText(Integer.toString(gld.getScore_2()));
 	   TopLabel.setText("You are the Winner!");
 	  }
 	  
-	  public void loser(GuessLetterData gld) {
+	  public void loser(GuessData gld) {
 	     Player1Score.setText(Integer.toString(gld.getScore_2())); 
 	     Player2Score.setText(Integer.toString(gld.getScore()));
 	     TopLabel.setText("You are the Loser!");

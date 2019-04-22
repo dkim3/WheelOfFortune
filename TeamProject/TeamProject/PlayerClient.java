@@ -117,22 +117,22 @@ public class PlayerClient extends AbstractClient
 			CategoryData tempcategory = (CategoryData) arg0;
 			spinWheelControl.startSpin();
 
-			GuessLetterData tempGuessLetterData = new GuessLetterData();
-			tempGuessLetterData.setwordToGuess(tempcategory.getWord());      
-			guessLetterControl.setGuessedLetterData(tempGuessLetterData);
+			GuessData tempGuessData = new GuessData();
+			tempGuessData.setwordToGuess(tempcategory.getWord());      
+			guessLetterControl.setGuessedLetterData(tempGuessData);
 			
 		}
 		//"WORD DATA" FROM SERVER
-		else if (arg0 instanceof GuessLetterData)
+		else if (arg0 instanceof GuessData)
 		{ 			
-			System.out.println("got a GuessLetterData from server");
+			System.out.println("got a GuessData from server");
 
-			GuessLetterData tempGuessData = (GuessLetterData) arg0;
+			GuessData tempGuessData = (GuessData) arg0;
 			if (tempGuessData.getLetterLeft() == 0)
 			{
 				resultControl.loser(tempGuessData);
 			}
-			//when player receive GuessLetterData which mean he get it wrong
+			//when player receive GuessData which mean he get it wrong
 			guessLetterControl.waitScreen();
 
 			guessLetterControl.updateDisplay(tempGuessData); 
