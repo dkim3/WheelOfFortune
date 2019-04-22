@@ -9,14 +9,14 @@ public class ResultPanel extends JPanel
   private JLabel TopLabel;
   private JLabel Scores;
   private JLabel Player1;
-  private JLabel Player1Score;
+  private JLabel YourScore;
   private JLabel Player2;
   private JLabel Player2Score;
   private JButton btnPlayAgain;
   private JButton btnQuit;
   
   //Getter and Setters
-  public void setPlayer1Score(String player1Score) {Player1Score.setText(player1Score);}
+  public void setPlayer1Score(String player1Score) {YourScore.setText(player1Score);}
   public void setPlayer2Score(String player2Score) {Player2Score.setText(player2Score);}
  
 	public ResultPanel(ResultControl rc) {
@@ -44,11 +44,11 @@ public class ResultPanel extends JPanel
 		Player1.setBounds(88, 154, 152, 27);
 		add(Player1);
 		
-		Player1Score = new JLabel("TBD1");
-		Player1Score.setFont(new Font("Berlin Sans FB", Font.PLAIN, 21));
-		Player1Score.setBounds(250, 160, 106, 23);
-    rc.setPlayer1Score(Player1Score);
-		add(Player1Score);
+		YourScore = new JLabel("TBD1");
+		YourScore.setFont(new Font("Berlin Sans FB", Font.PLAIN, 21));
+		YourScore.setBounds(250, 160, 106, 23);
+    rc.setPlayer1Score(YourScore);
+		add(YourScore);
 		
 		Player2 = new JLabel("Opponent Score :");
 		Player2.setFont(new Font("Berlin Sans FB", Font.PLAIN, 25));

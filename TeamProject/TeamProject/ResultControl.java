@@ -11,7 +11,7 @@ public class ResultControl implements ActionListener{
 
   // Private data fields for the container and chat client.
   private JPanel container;
-  private JLabel Player1Score;
+  private JLabel YourScore;
   private JLabel Player2Score;
   private JLabel TopLabel;
   private PlayerClient client;
@@ -23,7 +23,7 @@ public class ResultControl implements ActionListener{
     this.client = client;
   }
   public void setPlayerGUI (JFrame PlayerGUI) {this.PlayerGUI = PlayerGUI;}
-  public void setPlayer1Score(JLabel Player1Score){this.Player1Score = Player1Score;}
+  public void setPlayer1Score(JLabel Player1Score){this.YourScore = Player1Score;}
   public void setPlayer2Score(JLabel Player2Score){this.Player2Score = Player2Score;}
   public void setTopLabel(JLabel TopLabel){this.TopLabel = TopLabel;}
 
@@ -56,7 +56,7 @@ public class ResultControl implements ActionListener{
     CardLayout cardLayout = (CardLayout) container.getLayout();
     cardLayout.show(container, "7");
 
-    Player1Score.setText(Integer.toString(gld.getScore())); 
+    YourScore.setText(Integer.toString(gld.getScore())); 
     Player2Score.setText(Integer.toString(gld.getScore_2()));
     TopLabel.setText("You are the Winner!");
   }
@@ -65,7 +65,7 @@ public class ResultControl implements ActionListener{
   {
     CardLayout cardLayout = (CardLayout) container.getLayout();
     cardLayout.show(container, "7");
-    Player1Score.setText(Integer.toString(gld.getScore())); 
+    YourScore.setText(Integer.toString(gld.getScore())); 
     Player2Score.setText(Integer.toString(gld.getScore_2()));
     TopLabel.setText("You are the Loser!");
   }

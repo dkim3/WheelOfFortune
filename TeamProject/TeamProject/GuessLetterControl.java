@@ -231,6 +231,9 @@ public class GuessLetterControl implements ActionListener {
 
               try {
                 SwitchPlayer tempswitchPlayer = new SwitchPlayer();
+                int tempscore = data.getScore();
+                data.setScore(data.getScore_2());
+                data.setScore_2(tempscore);
                 tempswitchPlayer.setGuessData(data);
                 //								tempswitchPlayer.setLettersSoFar(data.getchosenLetter());
                 System.out.println("going to send switch plaer from client to server");
