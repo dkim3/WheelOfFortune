@@ -15,7 +15,7 @@ public class GuessLetterControl implements ActionListener {
 	private GuessData data;
 
 	private SwitchPlayer switchPlayer;
-	private ArrayList<Character> wordToDisplay;
+	private String wordToDisplay;
 	private ArrayList<Character> lettersSoFar;
 
 	private JTextField textField_Score;
@@ -112,18 +112,17 @@ public class GuessLetterControl implements ActionListener {
 		ArrayList<Character> letters = Data.getchosenLetter();
 		String answer = Data.getwordToGuess();
 
-		ArrayList<Character> displayAnswer = new ArrayList<>();
-		Character correctletter = letters.get(letters.size()-1);
+		String displayAnswer = "";
 
-		Integer index = answer.indexOf(correctletter)+1;
+
 		
 		for(int i = 0; i< answer.length();i++)
 		{
 			char a = answer.charAt(i);
 			if(letters.contains(a))
-				displayAnswer.add(a);
+				displayAnswer  = displayAnswer + a;
 			else
-				displayAnswer.add('_');
+				displayAnswer= displayAnswer + " _ ";
 		}
 
 
@@ -131,7 +130,7 @@ public class GuessLetterControl implements ActionListener {
 
 	}
 
-	public ArrayList<Character> getWord() {
+	public String getWord() {
 		return wordToDisplay;
 	}
 
