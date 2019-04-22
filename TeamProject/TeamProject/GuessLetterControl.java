@@ -33,6 +33,14 @@ public class GuessLetterControl implements ActionListener {
 	private JLabel lblError;
 
 	private JButton guessButton;
+	
+	public GuessLetterControl(JPanel container, PlayerClient client) {
+		// this.cl = cl;
+		this.container = container;
+		this.client = client;
+		data = new GuessData();
+		lettersSoFar = new ArrayList<Character>();
+	}
 
 	// setters and getters
 	public GuessData getData() {
@@ -119,11 +127,7 @@ public class GuessLetterControl implements ActionListener {
 		this.GuessedLetter = guess;
 	}
 
-	public GuessLetterControl(JPanel container, PlayerClient client) {
-		// this.cl = cl;
-		this.container = container;
-		this.client = client;
-	}
+	
 
 	@SuppressWarnings("static-access")
 	@Override
