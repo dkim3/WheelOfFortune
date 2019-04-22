@@ -135,28 +135,7 @@ public class PlayerClient extends AbstractClient
 
 			guessLetterControl.updateDisplay(tempGuessData); 
 		}
-		else if (arg0 instanceof TempData)
-		{ 			
-			System.out.println("got a TempData from server");
 
-			TempData tempData = (TempData) arg0;
-			GuessLetterData tempGuessData = new GuessLetterData();
-			tempGuessData.setwordToGuess(tempData.getWordToGuess());
-			tempGuessData.setPrizeMoney(tempData.getPrizeMoney());
-			tempGuessData.setChosenLetter(tempData.getChosenLetter());
-			tempGuessData.setScore(tempData.getScore());
-			tempGuessData.setScore_2(tempData.getScore_2());
-
-			
-			if (tempGuessData.getLetterLeft() == 0)
-			{
-				resultControl.loser(tempGuessData);
-			}
-			//when player receive GuessLetterData which mean he get it wrong
-			guessLetterControl.waitScreen();
-
-			guessLetterControl.updateDisplay(tempGuessData); 
-		}
 		//HANDLE SWITCH PLAYER REQUEST FROM SERVER
 		else if (arg0 instanceof SwitchPlayer)
 		{

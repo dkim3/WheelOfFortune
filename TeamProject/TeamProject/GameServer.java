@@ -2,9 +2,10 @@ package TeamProject;
 
 import java.awt.Color;
 import java.io.IOException;
+import java.net.ServerSocket;
 import java.sql.SQLException;
 import java.util.ArrayList;
-
+import java.util.Collection;
 
 import javax.swing.JLabel;
 import javax.swing.JTextArea;
@@ -27,30 +28,41 @@ public class GameServer extends AbstractServer
 	private GuessLetterData guessLetterData;
 	private SwitchPlayer SwitchPlayer;
 	private Integer numCategory = 0;
+	
 	private ArrayList<ConnectionToClient> clientList;
+//	private ArrayList<ServerSocket> socketList;
+
+//	private ServerSocket listener;
+
 
 	private JTextArea log;
 	private JLabel status;
 
 	//Constructor
-	public GameServer() {
+	public GameServer() throws IOException {
 		super(8300);
 		clientList = new ArrayList<ConnectionToClient>();
 		category = new ArrayList<String>();
-
+//		listener = new ServerSocket(8300);
+//		socketList = new ArrayList<ServerSocket>();
 
 	}
 
-	public GameServer(int port) {
+	public GameServer(int port) throws IOException {
 		super(port);
 		clientList = new ArrayList<ConnectionToClient>();
 		category = new ArrayList<String>();
+//		listener = new ServerSocket(8300);
+//		socketList = new ArrayList<ServerSocket>();
+
+
 	}
 
 	protected void handleMessageFromClient(Object arg0, ConnectionToClient arg1)
 	{
 		System.out.println("inside server" + arg0.toString());
-
+	    Thread[] clientThreadList = getClientConnections();
+	    
 		// CREATE ACCOUNT
 		if (arg0 instanceof LoginData)
 		{
@@ -142,23 +154,30 @@ public class GameServer extends AbstractServer
 				
 				SwitchPlayer tempswitchPlayer =  new SwitchPlayer();
 //				guessLetterData.setWordToGuess(wordToGuess);
-				
-				TempData tempData =  new TempData();
+				tempswitchPlayer.setWordToGuess(wordToGuess);
+//				TempData tempData =  new TempData();
 
-				clientList.size();
-				for(int i = clientList.size()-1; i< clientList.size(); i++)
+				int clientlistsize = clientList.size();
+				for(int i = clientlistsize-2; i< clientlistsize; i++)
 				{
-					ConnectionToClient tempclient =clientList.get(i);
+//					ConnectionToClient tempclient = new ConnectionToClient(clientList.get(i).getThreadGroup(),clientList.get(i).);
+//					tempclient = clientList.get(i);
+					ConnectionToClient tempclient = clientList.get(i);
+					ConnectionToClient tempclient_2 = null ;
+
 					try
 					{
 						if (tempclient.equals(arg1))
-						{//for some reason the socket disappear if send guessData to client
+						{
+							//for some reason the socket disappear if send guessData to client
 							tempclient.sendToClient(serverCategoryData);
 						}
 						else {
-							tempclient.getStackTrace();
-							tempclient.sendToClient(tempGuessData);
-//							clientList.add(client);
+							Thread c = new Thread (clientThreadList[i]);
+							
+					        ((ConnectionToClient)clientThreadList[i]).sendToClient(tempswitchPlayer);
+
+
 						}
 					} catch (IOException e)
 					{e.printStackTrace();	}
@@ -223,7 +242,21 @@ public class GameServer extends AbstractServer
 	}
 	public void clientConnected(ConnectionToClient client)
 	{
+//		try {
+//			socketList.addAll((Collection<? extends ServerSocket>) listener.accept());
+//			
+//		} catch (IOException e1) {
+//			e1.printStackTrace();
+//		}
+        
 		clientList.add(client);
+
+//		
+//		Object portNum = tempclient.getInfo("blocker");
+//		
+//		tempclient_2.setInfo("Socket", tempclient.getInfo("Socket"));
+
+		
 		log.append("Client "+ client.getId() +" Connected\n");
 		try {
 			client.sendToClient("username: Client-" + client.getId());

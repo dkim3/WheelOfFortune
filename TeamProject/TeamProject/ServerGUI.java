@@ -36,7 +36,7 @@ public class ServerGUI extends JFrame
 	private GameServer server;
 
 	//Methods go here
-	public ServerGUI(String title)
+	public ServerGUI(String title) throws IOException
 	{    
 		this.setTitle(title);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -229,7 +229,7 @@ public class ServerGUI extends JFrame
 
 	}
 
-	public static void main(String[] args)
+	public static void main(String[] args) throws IOException
 	{
 		new ServerGUI("Server");//args[0]); //args[0] represents the title of the GUI
 	}
