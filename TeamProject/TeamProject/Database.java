@@ -91,7 +91,7 @@ public class Database
       // no  matter what we used to store(int, data, double), we can use getString() to return as a String
       for(int i=1; i<=no_columns; i++)
       {
-        temp += rs.getString(i);
+        temp += rs.getString(i) +"/";
       }
       rows.add(temp);
 
