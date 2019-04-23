@@ -86,6 +86,7 @@ public class PlayerGUI extends JFrame
 		this.setSize(550, 500);
 		this.setVisible(true);
 	}
+  public PlayerClient getClient(){return clients;}
 
 	// Main function that creates the client GUI when the program is started.
 	public static void main(String[] args)
