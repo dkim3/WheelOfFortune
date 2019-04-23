@@ -49,7 +49,10 @@ public class Database
 
   }
 
-
+    public Connection getConnection ()
+  {
+    return conn;
+  }
 
   public ArrayList<String> query(String query) throws SQLException
   {
