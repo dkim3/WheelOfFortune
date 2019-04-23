@@ -12,7 +12,7 @@ import org.junit.Test;
 
 
 
-public class TeamProjectTest
+public class DatabaseTest
 { 
   private Database db;  
   private int rando;
@@ -45,7 +45,7 @@ public class TeamProjectTest
     String actual_animal = animals_in_databse.get(0);
     
     //compare expected with animals_in_databse using assertEquals
-     assertEquals("Animal comparision", expected, actual_animal);
+     assertEquals("Animal comparision", expected + "/", actual_animal);
   }
   
   
