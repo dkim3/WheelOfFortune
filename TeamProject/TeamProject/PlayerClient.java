@@ -10,24 +10,19 @@ import ocsf.client.AbstractClient;
 public class PlayerClient extends AbstractClient  implements Serializable 
 {
 	private InitialControl InitialControl;
-
 	private LoginControl loginControl;
 	private CreateAccountControl createAccountControl;
 	private GuessLetterControl guessLetterControl;
 	private SpinWheelControl spinWheelControl;
 	private ChooseCategoryControl chooseCategoryControl;
-	private ResultControl resultControl;
+		private ResultControl resultControl;
 	
 	private LoginData loginData;
 	private GuessData tempGuessData;
 	
-	public GuessData getTempGuessData() {
-		return tempGuessData;
-	}
-	public void setTempGuessData(GuessData tempGuessData) {
-		this.tempGuessData = tempGuessData;
-	}
-
+	private Integer totalPrice =0;
+	private Integer winRounds =0;
+	private Integer totalRounds =0;
 
 
 	private SwitchPlayer players;
@@ -37,6 +32,7 @@ public class PlayerClient extends AbstractClient  implements Serializable
 	public PlayerClient() {
 		super("localhost",8300);
 		tempGuessData = new GuessData();
+		
 	}
 	public PlayerClient(String host, int port) {
 		super(host,port);
@@ -97,7 +93,34 @@ public class PlayerClient extends AbstractClient  implements Serializable
 	public void setLoginData(LoginData loginData) {
 		this.loginData = loginData;
 	}
+	public GuessData getTempGuessData() {
+		return tempGuessData;
+	}
+	public void setTempGuessData(GuessData tempGuessData) {
+		this.tempGuessData = tempGuessData;
+	}
+	public Integer getTotalPrice() {
+		return totalPrice;
+	}
+	public void setTotalPrice(Integer totalPrice) {
+		this.totalPrice = totalPrice;
+	}
+	public Integer getWinRounds() {
+		return winRounds;
+	}
+	public void setWinRounds(Integer winRounds) {
+		this.winRounds = winRounds;
+	}
+	public Integer getTotalRounds() {
+		return totalRounds;
+	}
+	public void setTotalRounds(Integer totalRounds) {
+		this.totalRounds = totalRounds;
+	}
 
+	
+	
+	
 
 
 	protected void handleMessageFromServer(Object arg0)
@@ -171,6 +194,8 @@ public class PlayerClient extends AbstractClient  implements Serializable
 			
 			if (a == 0)
 			{
+				totalRounds++;
+				totalPrice += tempGuessData.getScore();
 				resultControl.loser(tempGuessData);
 			}
 			else {
@@ -186,13 +211,15 @@ public class PlayerClient extends AbstractClient  implements Serializable
 			SwitchPlayer tempSwitch = (SwitchPlayer) arg0;
 			tempGuessData = tempSwitch.getGuessData();
 			
+			 int tempscore = tempGuessData.getScore();
+			 tempGuessData.setScore(tempGuessData.getScore_2());
+			 tempGuessData.setScore_2(tempscore);
+             
 			spinWheelControl.setGld(tempGuessData);
 			guessLetterControl.updateDisplay(tempGuessData);
 			
 			guessLetterControl.myTurn();
 			spinWheelControl.startSpin();
-			
-
 		}
 
 
