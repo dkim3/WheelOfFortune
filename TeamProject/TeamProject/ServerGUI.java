@@ -23,7 +23,7 @@ import javax.swing.ScrollPaneConstants;
 public class ServerGUI extends JFrame
 {
 	//Data Fields go here
-	private JLabel status; //Initialized to ìNot Connectedî
+	private JLabel status; //Initialized to ‚ÄúNot Connected‚Äù
 	private String[] labels = {"Port #", "Timeout"};
 	private JTextField[] textFields = new JTextField[labels.length];
 	private JTextArea log;
@@ -232,6 +232,7 @@ public class ServerGUI extends JFrame
 		//server private
 
 	}
+  public GameServer getGameServer() {return server; }
 
 	public static void main(String[] args) throws IOException
 	{
