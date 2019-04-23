@@ -1,0 +1,1 @@
+java -cp .;ocsf.jar TeamProject.ServerGUI 8300 500

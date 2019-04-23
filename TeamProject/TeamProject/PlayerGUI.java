@@ -9,14 +9,16 @@ public class PlayerGUI extends JFrame
 	private PlayerClient clients;
 
 	// Constructor that creates the client GUI.
-	public PlayerGUI()
+	public PlayerGUI(String host, String port)
 	{
 
 		// Set the title and default close operation.
 		this.setTitle("Client");
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
+//		clients = new PlayerClient(host,Integer.parseInt(port)); 
 		clients = new PlayerClient(); 
+
 
 		try
 		{
@@ -88,6 +90,8 @@ public class PlayerGUI extends JFrame
 	// Main function that creates the client GUI when the program is started.
 	public static void main(String[] args)
 	{
-		new PlayerGUI();
+//		new PlayerGUI(args[0],args[1]);
+		new PlayerGUI("","");
+
 	}
 }

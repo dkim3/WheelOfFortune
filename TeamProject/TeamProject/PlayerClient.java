@@ -1,10 +1,13 @@
 package TeamProject;
+import java.io.IOException;
+import java.io.Serializable;
 import java.net.Socket;
 
+import com.mysql.fabric.xmlrpc.Client;
 
 import ocsf.client.AbstractClient;
 
-public class PlayerClient extends AbstractClient
+public class PlayerClient extends AbstractClient  implements Serializable 
 {
 	private InitialControl InitialControl;
 
@@ -14,8 +17,19 @@ public class PlayerClient extends AbstractClient
 	private SpinWheelControl spinWheelControl;
 	private ChooseCategoryControl chooseCategoryControl;
 	private ResultControl resultControl;
+	
+	private LoginData loginData;
 	private GuessData tempGuessData;
 	
+	public GuessData getTempGuessData() {
+		return tempGuessData;
+	}
+	public void setTempGuessData(GuessData tempGuessData) {
+		this.tempGuessData = tempGuessData;
+	}
+
+
+
 	private SwitchPlayer players;
 
 
@@ -76,6 +90,13 @@ public class PlayerClient extends AbstractClient
 	public void setResultControl( ResultControl resultControl ) {
 		this.resultControl = resultControl;
 	}
+	
+	public LoginData getLoginData() {
+		return loginData;
+	}
+	public void setLoginData(LoginData loginData) {
+		this.loginData = loginData;
+	}
 
 
 
@@ -84,7 +105,7 @@ public class PlayerClient extends AbstractClient
 		//LOGIN
 		if (arg0 instanceof LoginData)
 		{
-			LoginData loginData = (LoginData) arg0;
+			loginData = (LoginData) arg0;
 
 			if(loginData.getUsername().equals(""))
 			{
@@ -94,6 +115,11 @@ public class PlayerClient extends AbstractClient
 			else
 			{
 				System.out.println("Server Message sent to Client succed to login");
+//				try {
+//					sendToServer(this);
+//				} catch (IOException e) {
+//					e.printStackTrace();
+//				}
 				loginControl.loginSuccess();
 			}
 		}
@@ -158,7 +184,7 @@ public class PlayerClient extends AbstractClient
 		else if (arg0 instanceof SwitchPlayer)
 		{
 			SwitchPlayer tempSwitch = (SwitchPlayer) arg0;
-			GuessData tempGuessData = tempSwitch.getGuessData();
+			tempGuessData = tempSwitch.getGuessData();
 			
 			spinWheelControl.setGld(tempGuessData);
 			guessLetterControl.updateDisplay(tempGuessData);
@@ -171,4 +197,5 @@ public class PlayerClient extends AbstractClient
 
 
 	}
+	
 }

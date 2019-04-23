@@ -36,9 +36,9 @@ public class ServerGUI extends JFrame
 	private GameServer server;
 
 	//Methods go here
-	public ServerGUI(String title) throws IOException
+	public ServerGUI(String port, String timeout) throws IOException
 	{    
-		this.setTitle(title);
+		this.setTitle("SpinWheel_Server");
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		//North layout
@@ -87,8 +87,11 @@ public class ServerGUI extends JFrame
 			temp1.add(textFields[i]);
 			jp.add(temp1);
 		}
+		textFields[0].setText(port);
+		textFields[1].setText(timeout);
+		
 
-
+		
 		//Add label then a button
 		JPanel c1 = new JPanel();
 		c1.add(jp);
@@ -162,6 +165,8 @@ public class ServerGUI extends JFrame
 				{	
 					server.setPort(Integer.parseInt(textFields[0].getText()));
 					server.setTimeout(Integer.parseInt(textFields[0].getText()));
+					
+					
 
 					server.serverStarted();
 					try
@@ -169,7 +174,6 @@ public class ServerGUI extends JFrame
 						server.listen();
 					} catch (IOException e)
 					{
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
 				}
@@ -231,6 +235,9 @@ public class ServerGUI extends JFrame
 
 	public static void main(String[] args) throws IOException
 	{
-		new ServerGUI("Server");//args[0]); //args[0] represents the title of the GUI
+//		new ServerGUI("Server");//args[0]); //args[0] represents the title of the GUI
+		new ServerGUI("8300","500"); //args[0] represents the title of the GUI
+//		new ServerGUI(args[0],args[1]); //args[0] represents the title of the GUI
+
 	}
 }

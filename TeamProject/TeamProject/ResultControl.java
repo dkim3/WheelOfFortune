@@ -47,7 +47,7 @@ public class ResultControl implements ActionListener{
     else if(command.equals("Exit"))
     {
       //Exit the program
-      PlayerGUI.dispose();
+    	System.exit(0); 
     }
   }
 
