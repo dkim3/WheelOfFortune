@@ -14,7 +14,7 @@ import org.junit.Test;
 
 
 
-public class TeamProjectIntegrateTest
+public class PlayerClientTest
 { 
  // private Database db;  
  // private int rando;
@@ -28,13 +28,13 @@ public class TeamProjectIntegrateTest
   public void setUp() throws Exception 
   {
     //Start Server GUI
-    serverGUI = new ServerGUI("test");
+    serverGUI = new ServerGUI("8300", "500");
     //Get server
     server = serverGUI.getGameServer();
     server.listen();
 
     //Start Client GUI
-    clientGUI = new PlayerGUI();
+    clientGUI = new PlayerGUI("localhost","8300");
     //Get client
     client = clientGUI.getClient();
     
