@@ -36,6 +36,8 @@ public class PlayerClient extends AbstractClient  implements Serializable
 	}
 	public PlayerClient(String host, int port) {
 		super(host,port);
+		tempGuessData = new GuessData();
+
 	}
 
 	public InitialControl getInitialControl() {
